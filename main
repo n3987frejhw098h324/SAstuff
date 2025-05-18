@@ -100,5 +100,9 @@ game:GetService("RunService").RenderStepped:Connect(function()
     hrp.CFrame = CFrame.lookAt(pos, pos + side)
 end)
     else
-        
+        game.StarterGui:SetCore("SendNotification", {
+        Title = "wrong game!";
+        Text = "execute in the boss area!";
+        Duration = 5;
+    })
 end
