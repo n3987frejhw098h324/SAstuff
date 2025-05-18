@@ -9,16 +9,16 @@ nocooldown = hookfunction(wait, function(seconds)
     return nocooldown(0)
 end)
 
-local Players           = game:GetService("Players")
-local LocalPlayer       = Players.LocalPlayer
-local Character         = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
-local HumanoidRootPart  = Character:WaitForChild("HumanoidRootPart")
-local Humanoid          = Character:WaitForChild("Humanoid")
-local Time       = true
-local Attacking  = game:GetService("Workspace").Dead
-local Obby       = game:GetService("Workspace").ObbyW
-local Phase      = game:GetService("Workspace").BossPhase
-local Health     = game:GetService("Workspace").TrollHealth
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+local Humanoid = Character:WaitForChild("Humanoid")
+local Time = true
+local Attacking = game:GetService("Workspace").Dead
+local Obby = game:GetService("Workspace").ObbyW
+local Phase = game:GetService("Workspace").BossPhase
+local Health = game:GetService("Workspace").TrollHealth
 
 local Workspace = game:GetService("Workspace")
 if Workspace:FindFirstChild("Effects") then
