@@ -91,8 +91,11 @@ end)
 
 -- ts the thing lololool
 game:GetService("RunService").RenderStepped:Connect(function()
-    if not Character or not Character:FindFirstChild("HumanoidRootPart") then return end
-    local pos = HumanoidRootPart.Position
-    local left = -HumanoidRootPart.CFrame.RightVector
-    HumanoidRootPart.CFrame = CFrame.lookAt(pos, pos + left)
+    if not Character or not Character:FindFirstChild("HumanoidRootPart") or not workspace:FindFirstChild("TrollPrism") then return end
+    local hrp = Character.HumanoidRootPart
+    local pos = hrp.Position
+    local target = workspace.TrollPrism.Position
+    local direction = (target - pos).Unit
+    local right = Vector3.new(-direction.Z, 0, direction.X)
+    hrp.CFrame = CFrame.lookAt(pos, pos + right)
 end)
