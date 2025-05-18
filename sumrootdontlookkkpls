@@ -66,5 +66,10 @@ while task.wait(time_to_wait) do
     local servers = ListServers()
     local server = servers.data[math.random(1, #servers.data)]
 
+    -- Anchor before teleporting
+    if speaker.Character and speaker.Character:FindFirstChild("HumanoidRootPart") then
+        speaker.Character.HumanoidRootPart.Anchored = true
+    end
+
     TeleportService:TeleportToPlaceInstance(_place, server.id, speaker)
 end
