@@ -5,8 +5,8 @@ for i,v in pairs(getconnections(game.Players.LocalPlayer.Idled)) do
     v:Disable()
 end
 
-g = hookfunction(wait, function(seconds)
-return g(0)
+nocooldown = hookfunction(wait, function(seconds)
+    return nocooldown(0)
 end)
 
 local Players           = game:GetService("Players")
