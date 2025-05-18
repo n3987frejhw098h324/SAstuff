@@ -1,1 +1,3 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/n3987frejhw098h324/SAstuff/refs/heads/main/sumrootdontlookkkpls"))()
+if game.PlaceId == 5780309044 then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/n3987frejhw098h324/SAstuff/refs/heads/main/sumrootdontlookkkpls"))()
+end
