@@ -1,3 +1,4 @@
+if game.PlaceId == PLACE_2 then
 repeat wait() until game:IsLoaded() and game:GetService("Players")
 
 -- anti afk lol
@@ -98,3 +99,6 @@ game:GetService("RunService").RenderStepped:Connect(function()
     local side = Vector3.new(dir.Z, 0, -dir.X)
     hrp.CFrame = CFrame.lookAt(pos, pos + side)
 end)
+    else
+        
+end
