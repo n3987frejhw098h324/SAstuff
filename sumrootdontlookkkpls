@@ -4,10 +4,28 @@ local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 local TeleportService = game:GetService("TeleportService")
 local HttpService = game:GetService("HttpService")
+
 local speaker = Players.LocalPlayer
 local character = speaker.Character or speaker.CharacterAdded:Wait()
 local humanoid = character:FindFirstChildWhichIsA("Humanoid")
 local root = character:WaitForChild("HumanoidRootPart")
+
+-- Grab all tools in workspace and move them to backpack (optional)
+for _, tool in ipairs(workspace:GetChildren()) do
+    if tool:IsA("Tool") then
+        tool.Parent = speaker.Backpack
+    end
+end
+
+task.wait(1)  -- wait 1 sec after grabbing tools
+
+-- Check if "Uncanny Key" is in backpack
+local keyTool = speaker.Backpack:FindFirstChild("Uncanny Key")
+if keyTool then
+    humanoid:EquipTool(keyTool)
+end
+
+task.wait(3)
 
 root.CFrame = CFrame.new(1102, 582, -731)
 task.wait(10)
@@ -16,9 +34,9 @@ local tween = TweenService:Create(root, TweenInfo.new(1.5, Enum.EasingStyle.Line
 tween:Play()
 tween.Completed:Wait()
 
-task.wait(1)
+task.wait(10)
 
---bitchass serverhop i found cus mine didnt fucking work
+-- Serverhop logic
 local Http = game:GetService("HttpService")
 local Api = "https://games.roblox.com/v1/games/"
 local _place, _id = game.PlaceId, game.JobId
