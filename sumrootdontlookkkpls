@@ -9,7 +9,7 @@ local character = speaker.Character or speaker.CharacterAdded:Wait()
 local humanoid = character:FindFirstChildWhichIsA("Humanoid")
 local root = character:WaitForChild("HumanoidRootPart")
 
--- Grab all tools in workspace and move them to backpack (optional)
+--[[ Grab all tools in workspace and move them to backpack (optional)
 	for _, child in ipairs(workspace:GetChildren()) do
 		if speaker.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then
 			humanoid:EquipTool(child)
@@ -34,10 +34,10 @@ if keyTool then
     humanoid:EquipTool(keyTool)
 end
 
-task.wait(3)
+task.wait(3)]]
 
 root.CFrame = CFrame.new(1101, 586, -731)
-task.wait(10)
+task.wait(5)
 
 local tween = TweenService:Create(root, TweenInfo.new(1.5, Enum.EasingStyle.Linear), {CFrame = CFrame.new(1126, 590, -780)})
 tween:Play()
