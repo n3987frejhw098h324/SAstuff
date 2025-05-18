@@ -36,7 +36,7 @@ end
 
 task.wait(3)
 
-root.CFrame = CFrame.new(1100, 582, -733)
+root.CFrame = CFrame.new(1101, 586, -731)
 task.wait(10)
 
 local tween = TweenService:Create(root, TweenInfo.new(1.5, Enum.EasingStyle.Linear), {CFrame = CFrame.new(1126, 590, -780)})
