@@ -95,6 +95,6 @@ game:GetService("RunService").RenderStepped:Connect(function()
     local pos = hrp.Position
     local t = workspace.TrollPrism.Position
     local dir = (t - pos).Unit
-    local side = Vector3.new(-dir.Z, 0, dir.X)
+    local side = Vector3.new(dir.Z, 0, -dir.X)
     hrp.CFrame = CFrame.lookAt(pos, pos + side)
 end)
