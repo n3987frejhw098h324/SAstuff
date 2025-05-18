@@ -1,6 +1,6 @@
 repeat wait() until game:IsLoaded() and game:GetService("Players")
 
---uhhhhhh antiafk ongg
+--uhhhhhh antiafk ongg i think this is useless but still
 for i,v in pairs(getconnections(game.Players.LocalPlayer.Idled)) do
     v:Disable()
 end
