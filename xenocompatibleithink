@@ -13,8 +13,6 @@ if map and map:FindFirstChild("Launching Orb") then
     map["Launching Orb"]:Destroy()
 end
 
--- anti afk lol
-
 local p = game:GetService("Players")
 local lp = p.LocalPlayer
 local c = lp.Character or lp.CharacterAdded:Wait()
