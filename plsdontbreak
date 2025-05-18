@@ -123,3 +123,36 @@ game:GetService("RunService").RenderStepped:Connect(function()
     local side = Vector3.new(dir.Z, 0, -dir.X)
     hrp.CFrame = CFrame.lookAt(pos, pos + side)
 end)
+
+--[[task.spawn(function()
+    atk:GetPropertyChangedSignal("Value"):Connect(function()
+        if atk.Value == true then
+            task.wait(10)
+            p.LocalPlayer:Kick("Teleporting...")
+            task.wait(1)
+            game:GetService("TeleportService"):Teleport(5780309044, lp)
+        end
+    end)
+end)]]
+
+task.spawn(function()
+    local function storeItem(item)
+        item.Parent = c
+        task.wait(0.2)
+        for i = 1, 8 do
+            local args = { "Slot"..i, false, false }
+            game:GetService("ReplicatedStorage"):WaitForChild("Bank"):FireServer(unpack(args))
+            task.wait(0.2)
+        end
+    end
+
+    while true do
+        for _, name in ipairs({ "Afro", "Flushed Orb" }) do
+            local tool = lp.Backpack:FindFirstChild(name)
+            if tool then
+                storeItem(tool)
+            end
+        end
+        task.wait(1)
+    end
+end)
