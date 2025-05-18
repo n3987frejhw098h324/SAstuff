@@ -124,7 +124,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
     hrp.CFrame = CFrame.lookAt(pos, pos + side)
 end)
 
---[[task.spawn(function()
+task.spawn(function()
     atk:GetPropertyChangedSignal("Value"):Connect(function()
         if atk.Value == true then
             task.wait(10)
@@ -133,7 +133,7 @@ end)
             game:GetService("TeleportService"):Teleport(5780309044, lp)
         end
     end)
-end)]]
+end)
 
 task.spawn(function()
     local function storeItem(item)
