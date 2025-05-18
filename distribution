@@ -1,10 +1,19 @@
 if not getgenv()._loadedSA then
+    if game.PlaceId ~= 11423467063 then
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "WRONG PLACE";
+            Text = "EXECUTE AT THE BOSSFIGHT";
+            Duration = 5;
+        })
+        return
+    end
+
     getgenv()._loadedSA = true
     loadstring(game:HttpGet("https://raw.githubusercontent.com/n3987frejhw098h324/SAstuff/refs/heads/main/plsdontbreak"))()
 else
     game.StarterGui:SetCore("SendNotification", {
-        Title = "script already loaded";
-        Text = "do NOT run the script more than once";
+        Title = "ALREADY LOADED";
+        Text = "DO NOT EXECUTE MORE THAN ONCE";
         Duration = 5;
     })
 end
