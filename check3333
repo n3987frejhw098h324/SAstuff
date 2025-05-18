@@ -3,7 +3,7 @@ if not getgenv()._loadedSA then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/n3987frejhw098h324/SAstuff/refs/heads/main/plsdontbreak"))()
 else
     game.StarterGui:SetCore("SendNotification", {
-        Title = "Script Already Loaded";
+        Title = "script already loaded";
         Text = "do NOT run the script more than once";
         Duration = 5;
     })
