@@ -9,40 +9,34 @@ local character = speaker.Character or speaker.CharacterAdded:Wait()
 local humanoid = character:FindFirstChildWhichIsA("Humanoid")
 local root = character:WaitForChild("HumanoidRootPart")
 
--- Remove StartGUI
-local startGui = speaker:WaitForChild("PlayerGui"):FindFirstChild("StartGUI")
-if startGui then
-    startGui:Destroy()
-end
-
 -- Grab all tools in workspace and move them to backpack (optional)
-for _, child in ipairs(workspace:GetChildren()) do
-	if speaker.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then
-		humanoid:EquipTool(child)
+	for _, child in ipairs(workspace:GetChildren()) do
+		if speaker.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then
+			humanoid:EquipTool(child)
+		end
 	end
-end
 
-if grabtoolsFunc then 
-	grabtoolsFunc:Disconnect() 
-end
-
-grabtoolsFunc = workspace.ChildAdded:Connect(function(child)
-	if speaker.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then
-		humanoid:EquipTool(child)
+	if grabtoolsFunc then 
+		grabtoolsFunc:Disconnect() 
 	end
-end)
+
+	grabtoolsFunc = workspace.ChildAdded:Connect(function(child)
+		if speaker.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then
+			humanoid:EquipTool(child)
+		end
+	end)
 
 task.wait(1)  -- wait 1 sec after grabbing tools
 
 -- Check if "Uncanny Key" is in backpack
 local keyTool = speaker.Backpack:FindFirstChild("Uncanny Key")
 if keyTool then
-	humanoid:EquipTool(keyTool)
+    humanoid:EquipTool(keyTool)
 end
 
 task.wait(3)
 
-root.CFrame = CFrame.new(1101, 582, -733)
+root.CFrame = CFrame.new(1100, 582, -733)
 task.wait(10)
 
 local tween = TweenService:Create(root, TweenInfo.new(1.5, Enum.EasingStyle.Linear), {CFrame = CFrame.new(1126, 590, -780)})
@@ -58,24 +52,24 @@ local _place, _id = game.PlaceId, game.JobId
 local _servers = Api .. _place .. "/servers/Public?sortOrder=Asc&limit=10"
 
 local function ListServers(cursor)
-	local raw = game:HttpGet(_servers .. ((cursor and "&cursor=" .. cursor) or ""))
-	return Http:JSONDecode(raw)
+    local raw = game:HttpGet(_servers .. ((cursor and "&cursor=" .. cursor) or ""))
+    return Http:JSONDecode(raw)
 end
 
 local time_to_wait = 8
 
 while task.wait(time_to_wait) do
-	if speaker.Character and speaker.Character:FindFirstChild("HumanoidRootPart") then
-		speaker.Character.HumanoidRootPart.Anchored = true
-	end
+    if speaker.Character and speaker.Character:FindFirstChild("HumanoidRootPart") then
+        speaker.Character.HumanoidRootPart.Anchored = true
+    end
 
-	local servers = ListServers()
-	local server = servers.data[math.random(1, #servers.data)]
+    local servers = ListServers()
+    local server = servers.data[math.random(1, #servers.data)]
 
-	-- Anchor before teleporting
-	if speaker.Character and speaker.Character:FindFirstChild("HumanoidRootPart") then
-		speaker.Character.HumanoidRootPart.Anchored = true
-	end
+    -- Anchor before teleporting
+    if speaker.Character and speaker.Character:FindFirstChild("HumanoidRootPart") then
+        speaker.Character.HumanoidRootPart.Anchored = true
+    end
 
-	TeleportService:TeleportToPlaceInstance(_place, server.id, speaker)
+    TeleportService:TeleportToPlaceInstance(_place, server.id, speaker)
 end
