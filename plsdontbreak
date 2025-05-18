@@ -7,7 +7,7 @@ l.FogStart = 0
 l.GlobalShadows = false
 l.ClockTime = 14
 
--- delete orb if exists
+-- dont let them know !!!
 local map = workspace:FindFirstChild("Map")
 if map and map:FindFirstChild("Launching Orb") then
     map["Launching Orb"]:Destroy()
