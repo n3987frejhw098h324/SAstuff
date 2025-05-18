@@ -9,31 +9,6 @@ local character = speaker.Character or speaker.CharacterAdded:Wait()
 local humanoid = character:FindFirstChildWhichIsA("Humanoid")
 local root = character:WaitForChild("HumanoidRootPart")
 
-for _, child in ipairs(workspace:GetChildren()) do
-    if speaker.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then
-        humanoid:EquipTool(child)
-    end
-end
-
-local function findUncannyKey()
-    for _, tool in ipairs(speaker.Backpack:GetChildren()) do
-        if tool:IsA("Tool") and tool.Name == "Uncanny Key" then
-            return tool
-        end
-    end
-    for _, tool in ipairs(character:GetChildren()) do
-        if tool:IsA("Tool") and tool.Name == "Uncanny Key" then
-            return tool
-        end
-    end
-end
-
-local uncannyKey = findUncannyKey()
-if uncannyKey then
-    task.wait(0.1)
-    humanoid:EquipTool(uncannyKey)
-end
-
 root.CFrame = CFrame.new(1102, 582, -731)
 task.wait(10)
 
