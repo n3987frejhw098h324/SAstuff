@@ -1,0 +1,68 @@
+if not game:IsLoaded() then game.Loaded:Wait() end
+
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local TeleportService = game:GetService("TeleportService")
+local HttpService = game:GetService("HttpService")
+local speaker = Players.LocalPlayer
+local character = speaker.Character or speaker.CharacterAdded:Wait()
+local humanoid = character:FindFirstChildWhichIsA("Humanoid")
+local root = character:WaitForChild("HumanoidRootPart")
+
+for _, child in ipairs(workspace:GetChildren()) do
+    if speaker.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then
+        humanoid:EquipTool(child)
+    end
+end
+
+local function findUncannyKey()
+    for _, tool in ipairs(speaker.Backpack:GetChildren()) do
+        if tool:IsA("Tool") and tool.Name == "Uncanny Key" then
+            return tool
+        end
+    end
+    for _, tool in ipairs(character:GetChildren()) do
+        if tool:IsA("Tool") and tool.Name == "Uncanny Key" then
+            return tool
+        end
+    end
+end
+
+local uncannyKey = findUncannyKey()
+if uncannyKey then
+    task.wait(0.1)
+    humanoid:EquipTool(uncannyKey)
+end
+
+root.CFrame = CFrame.new(1102, 582, -731)
+task.wait(10)
+
+local tween = TweenService:Create(root, TweenInfo.new(1.5, Enum.EasingStyle.Linear), {CFrame = CFrame.new(1126, 590, -780)})
+tween:Play()
+tween.Completed:Wait()
+
+task.wait(1)
+
+--bitchass serverhop i found cus mine didnt fucking work
+local Http = game:GetService("HttpService")
+local Api = "https://games.roblox.com/v1/games/"
+local _place, _id = game.PlaceId, game.JobId
+local _servers = Api .. _place .. "/servers/Public?sortOrder=Asc&limit=10"
+
+local function ListServers(cursor)
+    local raw = game:HttpGet(_servers .. ((cursor and "&cursor=" .. cursor) or ""))
+    return Http:JSONDecode(raw)
+end
+
+local time_to_wait = 6
+
+while task.wait(time_to_wait) do
+    if speaker.Character and speaker.Character:FindFirstChild("HumanoidRootPart") then
+        speaker.Character.HumanoidRootPart.Anchored = true
+    end
+
+    local servers = ListServers()
+    local server = servers.data[math.random(1, #servers.data)]
+
+    TeleportService:TeleportToPlaceInstance(_place, server.id, speaker)
+end
