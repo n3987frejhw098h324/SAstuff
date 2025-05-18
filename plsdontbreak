@@ -147,7 +147,7 @@ task.spawn(function()
     end
 
     while true do
-        for _, name in ipairs({ "Afro", "Flushed Orb", "Bone" }) do
+        for _, name in ipairs({ "Afro", "Flushed Orb" }) do
             local tool = lp.Backpack:FindFirstChild(name)
             if tool then
                 storeItem(tool)
