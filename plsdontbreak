@@ -1,101 +1,100 @@
 repeat wait() until game:IsLoaded() and game:GetService("Players")
 
---uhhhhhh antiafk ongg i think this is useless but still
-for i,v in pairs(getconnections(game.Players.LocalPlayer.Idled)) do
+-- anti afk lol
+for _,v in pairs(getconnections(game.Players.LocalPlayer.Idled)) do
     v:Disable()
 end
 
-nocooldown = hookfunction(wait, function(seconds)
-    return nocooldown(0)
+nocd = hookfunction(wait, function(s)
+    return nocd(0)
 end)
 
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
-local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
-local Humanoid = Character:WaitForChild("Humanoid")
-local Time = true
-local Attacking = game:GetService("Workspace").Dead
-local Obby = game:GetService("Workspace").ObbyW
-local Phase = game:GetService("Workspace").BossPhase
-local Health = game:GetService("Workspace").TrollHealth
+local p = game:GetService("Players")
+local lp = p.LocalPlayer
+local c = lp.Character or lp.CharacterAdded:Wait()
+local hrp = c:WaitForChild("HumanoidRootPart")
+local h = c:WaitForChild("Humanoid")
+local ok = true
+local atk = game:GetService("Workspace").Dead
+local o = game:GetService("Workspace").ObbyW
+local ph = game:GetService("Workspace").BossPhase
+local hp = game:GetService("Workspace").TrollHealth
+local w = game:GetService("Workspace")
 
-local Workspace = game:GetService("Workspace")
-if Workspace:FindFirstChild("Effects") then
-    Workspace.Effects:Destroy()
+if w:FindFirstChild("Effects") then
+    w.Effects:Destroy()
 end
-if Workspace.Map:FindFirstChild("ThunderParts") then
-    Workspace.Map.ThunderParts:Destroy()
+if w.Map:FindFirstChild("ThunderParts") then
+    w.Map.ThunderParts:Destroy()
 end
 
-local function equipSword()
-    local Sword = Character:FindFirstChild("KnightsSword")
-    if Sword and Sword:FindFirstChild("Handle") then
-        local Box = Instance.new("SelectionBox")
-        Box.Name = "SelectionBoxCreated"
-        Box.Parent = Sword.Handle
-        Box.Adornee = Sword.Handle
-        Sword.Handle.Massless = true
-        Sword.GripPos = Vector3.new(0,0,0)
-        Character:FindFirstChildOfClass("Humanoid"):UnequipTools()
-        Sword.Parent = Character
-        Sword.Handle.Size = Vector3.new(2, 2, 500)
+local function eq()
+    local tool = c:FindFirstChild("KnightsSword")
+    if tool and tool:FindFirstChild("Handle") then
+        local box = Instance.new("SelectionBox")
+        box.Name = "sb"
+        box.Parent = tool.Handle
+        box.Adornee = tool.Handle
+        tool.Handle.Massless = true
+        tool.GripPos = Vector3.new(0,0,0)
+        c:FindFirstChildOfClass("Humanoid"):UnequipTools()
+        tool.Parent = c
+        tool.Handle.Size = Vector3.new(2, 2, 500)
     end
 end
 
-if LocalPlayer.Backpack:FindFirstChild("KnightsSword") then
-    LocalPlayer.Backpack["KnightsSword"].Parent = Character
-    equipSword()
-elseif Character:FindFirstChild("KnightsSword") then
-    equipSword()
+if lp.Backpack:FindFirstChild("KnightsSword") then
+    lp.Backpack["KnightsSword"].Parent = c
+    eq()
+elseif c:FindFirstChild("KnightsSword") then
+    eq()
 end
 
 task.spawn(function()
-    while Attacking.Value == false do task.wait()
-        if Obby.Value == true then
-            HumanoidRootPart.CFrame = CFrame.new(20.4561386, 113.245972, 196.61351, 0.0634383112, 5.81675401e-08, -0.99798578, 8.29346689e-08, 1, 6.35567972e-08, 0.99798578, -8.67995524e-08, 0.0634383112)
+    while not atk.Value do task.wait()
+        if o.Value then
+            hrp.CFrame = CFrame.new(20.456, 113.245, 196.613)
         else
-            if Phase.Value == "None" then
-                HumanoidRootPart.CFrame = CFrame.new(-5.46999931, -4.45343876, 248.209991, 1, 1.68923409e-09, 7.63995055e-14, -1.68923409e-09, 1, 6.64721389e-09, -7.63882772e-14, -6.64721389e-09, 1)
+            if ph.Value == "None" then
+                hrp.CFrame = CFrame.new(-5.47, -4.45, 248.21)
             else
-                HumanoidRootPart.CFrame = CFrame.new(-19.8957844, -4.77343941, 142.49881, -0.999476075, -3.27794467e-08, -0.0323671587, -3.71140274e-08, 1, 1.33318295e-07, 0.0323671587, 1.34449706e-07, -0.999476075)
+                hrp.CFrame = CFrame.new(-19.89, -4.77, 142.49)
             end
         end
     end
 end)
 
 task.spawn(function()
-    while Attacking.Value == false do task.wait()
-        if Obby.Value == false then
-            if Character:FindFirstChild("KnightsSword") then
-                Character.KnightsSword:Activate()
+    while not atk.Value do task.wait()
+        if not o.Value then
+            if c:FindFirstChild("KnightsSword") then
+                c.KnightsSword:Activate()
             end
         end
     end
 end)
 
-local function Percent(First, Second)
-    return (First / Second)
+local function pct(x, y)
+    return (x / y)
 end
 
-Health:GetPropertyChangedSignal("Value"):Connect(function()
-    if Percent(Health.Value, Health.MaxHealth.Value) <= 0.003 and Percent(Health.Value, Health.MaxHealth.Value) >= 0 then
-        if Time then
-            Time = false
-            Character:FindFirstChildOfClass("Humanoid"):UnequipTools()
+hp:GetPropertyChangedSignal("Value"):Connect(function()
+    if pct(hp.Value, hp.MaxHealth.Value) <= 0.003 and pct(hp.Value, hp.MaxHealth.Value) >= 0 then
+        if ok then
+            ok = false
+            c:FindFirstChildOfClass("Humanoid"):UnequipTools()
             wait(WaitTime)
-            LocalPlayer.Backpack["KnightsSword"].Parent = Character
+            lp.Backpack["KnightsSword"].Parent = c
         end
     end
 end)
 
--- ts the thing lololool
+-- ts the uhh aiming thing
 game:GetService("RunService").RenderStepped:Connect(function()
-    if not Character or not Character:FindFirstChild("HumanoidRootPart") or not workspace:FindFirstChild("TrollPrism") then return end
-    local hrp = Character.HumanoidRootPart
+    if not c or not c:FindFirstChild("HumanoidRootPart") or not workspace:FindFirstChild("TrollPrism") then return end
     local pos = hrp.Position
-    local target = workspace.TrollPrism.Position
-    local direction = (target - pos).Unit
-    local right = Vector3.new(-direction.Z, 0, direction.X)
-    hrp.CFrame = CFrame.lookAt(pos, pos + right)
+    local t = workspace.TrollPrism.Position
+    local dir = (t - pos).Unit
+    local side = Vector3.new(-dir.Z, 0, dir.X)
+    hrp.CFrame = CFrame.lookAt(pos, pos + side)
 end)
