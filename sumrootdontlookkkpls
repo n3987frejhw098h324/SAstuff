@@ -82,7 +82,7 @@ local function ListServers(cursor)
 	return HttpService:JSONDecode(raw)
 end
 
-local time_to_wait = 1
+local time_to_wait = 5
 while task.wait(time_to_wait) do
 	if root then root.Anchored = true end
 
