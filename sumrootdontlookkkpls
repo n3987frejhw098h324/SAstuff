@@ -30,10 +30,30 @@ local function TeleportRandomServer()
 end
 
 local stopFlag = false
+
+-- Improved Dwayne check
+local function IsDwayneInBadSpot()
+	local dwayne = workspace:FindFirstChild("Map") and workspace.Map:FindFirstChild("Arena") and workspace.Map.Arena:FindFirstChild("Dwayne")
+	if not dwayne then return false end
+	return (dwayne.Position - dwaynePos).Magnitude <= 1
+end
+
 task.spawn(function()
+	local falsePosCount = 0
+	local maxFalsePos = 3 -- number of consistent bad reads before teleporting
+
 	while not stopFlag do
 		local dwayne = workspace:FindFirstChild("Map") and workspace.Map:FindFirstChild("Arena") and workspace.Map.Arena:FindFirstChild("Dwayne")
-		if dwayne and (dwayne.Position - dwaynePos).Magnitude <= 1 then
+
+		if dwayne then
+			if (dwayne.Position - dwaynePos).Magnitude <= 1 then
+				falsePosCount += 1
+			else
+				falsePosCount = 0
+			end
+		end
+
+		if falsePosCount >= maxFalsePos then
 			TeleportRandomServer()
 			return
 		end
