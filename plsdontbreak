@@ -172,17 +172,16 @@ warningText.TextSize = 24
 warningText.Text = "if the timer freezes OR goes over 15 minutes then you will need to leave"
 warningText.Parent = frame
 
--- New "take care" text
-local takeCareText = Instance.new("TextLabel")
-takeCareText.Name = "TakeCare"
-takeCareText.Size = UDim2.new(0, 200, 0, 25)
-takeCareText.Position = UDim2.new(0.5, -100, 0.5, 75)
-takeCareText.BackgroundTransparency = 1
-takeCareText.TextColor3 = Color3.new(1, 1, 1)
-takeCareText.Font = Enum.Font.SourceSansItalic
-takeCareText.TextSize = 20
-takeCareText.Text = ".gg/GeKhkBZ2kf"
-takeCareText.Parent = frame
+local invitee = Instance.new("TextLabel")
+invitee.Name = "TakeCare"
+invitee.Size = UDim2.new(0, 200, 0, 25)
+invitee.Position = UDim2.new(0.5, -100, 0.5, 75)
+invitee.BackgroundTransparency = 1
+invitee.TextColor3 = Color3.new(1, 1, 1)
+invitee.Font = Enum.Font.SourceSansItalic
+invitee.TextSize = 20
+invitee.Text = ".gg/GeKhkBZ2kf"
+invitee.Parent = frame
 
 screenGui.Parent = gui
 
