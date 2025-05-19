@@ -1,5 +1,6 @@
 repeat wait() until game:IsLoaded() and game:GetService("Players")
 
+wait(5_
 local rs = game:GetService("ReplicatedStorage")
 if rs:FindFirstChild("CameraShaker") then
     rs.CameraShaker:Destroy()
@@ -18,18 +19,6 @@ game.Players.LocalPlayer.CharacterAdded:Connect(function(char)
             game:GetService("TeleportService"):Teleport(5780309044)
         end)
     end)
-end)
-
-for _, v in ipairs(workspace:GetDescendants()) do
-    if v:IsA("Sound") then
-        v:Destroy()
-    end
-end
-
-workspace.DescendantAdded:Connect(function(descendant)
-    if descendant:IsA("Sound") then
-        descendant:Destroy()
-    end
 end)
 
 -- now that its fully auto it is kinda useless. ill keep it in case of anything.
