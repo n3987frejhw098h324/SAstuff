@@ -9,7 +9,7 @@ local mainFrame = Instance.new("Frame", gui)
 mainFrame.Size = UDim2.new(0, 400, 0, 100)
 mainFrame.Position = UDim2.new(0.5, -200, 0.3, 0)
 mainFrame.BackgroundTransparency = 1
-mainFrame.ZIndex = 999999999
+mainFrame.ZIndex = 9999
 
 for i = 1, 8 do
 	local slotLabel = Instance.new("TextLabel")
@@ -23,7 +23,7 @@ for i = 1, 8 do
 	slotLabel.TextScaled = true
 	slotLabel.Font = Enum.Font.SourceSansSemibold
 	slotLabel.Text = "..."
-	slotLabel.ZIndex = 1001 -- higher than the frame
+	slotLabel.ZIndex = 10000
 
 	slotLabel.Parent = mainFrame
 
