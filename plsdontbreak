@@ -1,6 +1,6 @@
 repeat wait() until game:IsLoaded() and game:GetService("Players")
 
-wait(5_
+wait(5)
 local rs = game:GetService("ReplicatedStorage")
 if rs:FindFirstChild("CameraShaker") then
     rs.CameraShaker:Destroy()
@@ -12,14 +12,6 @@ l.FogEnd = 999999
 l.FogStart = 0
 l.GlobalShadows = false
 l.ClockTime = 14
-
-game.Players.LocalPlayer.CharacterAdded:Connect(function(char)
-    char:WaitForChild("Humanoid").Died:Connect(function()
-        task.delay(3, function()
-            game:GetService("TeleportService"):Teleport(5780309044)
-        end)
-    end)
-end)
 
 -- now that its fully auto it is kinda useless. ill keep it in case of anything.
 local map = workspace:FindFirstChild("Map")
@@ -141,6 +133,15 @@ task.spawn(function()
             task.wait(1)
             game:GetService("TeleportService"):Teleport(5780309044, lp)
         end
+    end)
+end)
+
+
+game.Players.LocalPlayer.CharacterAdded:Connect(function(char)
+    char:WaitForChild("Humanoid").Died:Connect(function()
+        task.delay(3, function()
+            game:GetService("TeleportService"):Teleport(5780309044)
+        end)
     end)
 end)
 
