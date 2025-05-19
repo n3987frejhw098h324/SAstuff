@@ -1,5 +1,8 @@
+local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
-local localPlayer = game.Players.LocalPlayer
+local RunService = game:GetService("RunService")
+
+local localPlayer = Players.LocalPlayer
 local localCharacter = localPlayer.Character or localPlayer.CharacterAdded:Wait()
 local hrp = localCharacter:WaitForChild("HumanoidRootPart")
 
@@ -7,14 +10,27 @@ local POS2_A = Vector3.new(66, 44, 90)
 local POS2_B = Vector3.new(-75, 44, 93)
 local TP_SPOT = Vector3.new(67, 44, 99)
 
--- Tween function with promise-style wait
+-- Tween function
 local function tweenTo(part, goalPos, duration)
 	local tween = TweenService:Create(part, TweenInfo.new(duration, Enum.EasingStyle.Linear), {CFrame = CFrame.new(goalPos)})
 	tween:Play()
 	tween.Completed:Wait()
 end
 
--- Start position
+-- Anti-fling
+local antifling = RunService.Stepped:Connect(function()
+	for _, player in pairs(Players:GetPlayers()) do
+		if player ~= localPlayer and player.Character then
+			for _, part in pairs(player.Character:GetDescendants()) do
+				if part:IsA("BasePart") then
+					part.CanCollide = false
+				end
+			end
+		end
+	end
+end)
+
+-- Start tween loop
 tweenTo(hrp, POS2_A, 1)
 
 task.spawn(function()
