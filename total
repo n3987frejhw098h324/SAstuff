@@ -4,6 +4,23 @@ for _,v in pairs(getconnections(game.Players.LocalPlayer.Idled)) do
     v:Disable()
 end
 
+local joinTime = tick()
+
+local function gotoooo()
+    local TeleportService = game:GetService("TeleportService")
+    TeleportService:Teleport(5780309044)
+end
+
+task.spawn(function()
+    while true do
+        task.wait(10)
+        if tick() - joinTime >= 900 then -- 900 seconds = 15 minutes
+            gotoooo()
+            break
+        end
+    end
+end)
+
 if game.PlaceId == 5780309044 then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/n3987frejhw098h324/SAstuff/refs/heads/main/sharelol"))()
 end
@@ -11,7 +28,6 @@ end
 if game.PlaceId == 11423379012 then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/n3987frejhw098h324/SAstuff/refs/heads/main/queueeueueueuuu"))()
 end
-
 
 if game.PlaceId == 11423467063 then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/n3987frejhw098h324/SAstuff/refs/heads/main/plsdontbreak"))()
