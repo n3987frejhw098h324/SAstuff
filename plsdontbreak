@@ -12,6 +12,14 @@ l.FogStart = 0
 l.GlobalShadows = false
 l.ClockTime = 14
 
+game.Players.LocalPlayer.CharacterAdded:Connect(function(char)
+    char:WaitForChild("Humanoid").Died:Connect(function()
+        task.delay(3, function()
+            game:GetService("TeleportService"):Teleport(5780309044)
+        end)
+    end)
+end)
+
 for _, v in ipairs(workspace:GetDescendants()) do
     if v:IsA("Sound") then
         v:Destroy()
