@@ -12,6 +12,9 @@ local root = character:WaitForChild("HumanoidRootPart")
 
 local dwaynePos = Vector3.new(1124.9949951171875, 590.0040283203125, -772.2570190429688)
 
+local joinTime = tick()
+local TIMEOUT = 120
+
 local function ListServers(cursor)
 	local url = ("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Asc&limit=10%s"):format(game.PlaceId, cursor and "&cursor=" .. cursor or "")
 	local raw = game:HttpGet(url)
@@ -33,10 +36,17 @@ task.spawn(function()
 			TeleportRandomServer()
 			return
 		end
+
+		if tick() - joinTime >= TIMEOUT then
+			TeleportRandomServer()
+			return
+		end
+
 		task.wait(0.5)
 	end
 end)
 
+-- Movement
 root.CFrame = CFrame.new(1101, 586, -731)
 wait(1.5)
 
