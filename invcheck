@@ -1,14 +1,16 @@
 local player = game:GetService("Players").LocalPlayer
-local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+local gui = Instance.new("ScreenGui")
 gui.Name = "BankItemDisplay"
 gui.ResetOnSpawn = false
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+gui.Parent = player:WaitForChild("PlayerGui")
 
 local mainFrame = Instance.new("Frame", gui)
 mainFrame.Size = UDim2.new(0, 400, 0, 100)
-mainFrame.Position = UDim2.new(0.5, -200, 0.3, 0) -- slightly above center
+mainFrame.Position = UDim2.new(0.5, -200, 0.3, 0)
 mainFrame.BackgroundTransparency = 1
+mainFrame.ZIndex = 1000
 
--- Create 8 squares (TextLabels)
 for i = 1, 8 do
 	local slotLabel = Instance.new("TextLabel")
 	slotLabel.Name = "Slot" .. i
@@ -21,10 +23,10 @@ for i = 1, 8 do
 	slotLabel.TextScaled = true
 	slotLabel.Font = Enum.Font.SourceSansSemibold
 	slotLabel.Text = "..."
+	slotLabel.ZIndex = 1001 -- higher than the frame
 
 	slotLabel.Parent = mainFrame
 
-	-- Update the slot label text with item name
 	task.spawn(function()
 		while true do
 			pcall(function()
