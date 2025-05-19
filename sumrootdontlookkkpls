@@ -1,4 +1,4 @@
-wait(6)
+wait(7)
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 local TeleportService = game:GetService("TeleportService")
@@ -45,7 +45,7 @@ tween.Completed:Wait()
 task.wait(17)
 
 stopFlag = true
-while task.wait(2) do
+while task.wait(5) do
 	if root then root.Anchored = true end
 	TeleportRandomServer()
 end
