@@ -9,7 +9,7 @@ local mainFrame = Instance.new("Frame", gui)
 mainFrame.Size = UDim2.new(0, 400, 0, 100)
 mainFrame.Position = UDim2.new(0.5, -200, 0.3, 0)
 mainFrame.BackgroundTransparency = 1
-mainFrame.ZIndex = 1000
+mainFrame.ZIndex = 999999999
 
 for i = 1, 8 do
 	local slotLabel = Instance.new("TextLabel")
