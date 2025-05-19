@@ -6,7 +6,6 @@
 	local POS2_B = Vector3.new(-75, 44, 93)
 	local TP_SPOT = Vector3.new(67, 44, 99) -- replace this with your actual TP_SPOT
 
-	noCollide(localCharacter)
 	tweenTo(hrp, POS2_A, 1)
 
 	task.spawn(function()
