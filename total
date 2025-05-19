@@ -1,22 +1,7 @@
-local Players         = game:GetService("Players")
-local TeleportService = game:GetService("TeleportService")
-local RunService      = game:GetService("RunService")
-local TweenService    = game:GetService("TweenService")
-
 repeat task.wait() until game:IsLoaded()
 
 for _,v in pairs(getconnections(game.Players.LocalPlayer.Idled)) do
     v:Disable()
-end
-
-local localPlayer = Players.LocalPlayer
-
-local function tweenTo(hrp, position, time)
-	local tweenInfo = TweenInfo.new(time, Enum.EasingStyle.Linear)
-	local goal = {CFrame = CFrame.new(position)}
-	local tween = TweenService:Create(hrp, tweenInfo, goal)
-	tween:Play()
-	tween.Completed:Wait()
 end
 
 if game.PlaceId == 5780309044 then
@@ -24,41 +9,7 @@ if game.PlaceId == 5780309044 then
 end
 
 if game.PlaceId == 11423379012 then
-	local function noCollide(character)
-		for _, part in ipairs(character:GetDescendants()) do
-			if part:IsA("BasePart") then
-				part.CanCollide = false
-			end
-		end
-	end
-
-	local localPlayer = game.Players.LocalPlayer
-	local localCharacter = localPlayer.Character or localPlayer.CharacterAdded:Wait()
-	local hrp = localCharacter:WaitForChild("HumanoidRootPart")
-
-	local POS2_A = Vector3.new(66, 44, 90) -- replace this with your actual POS2_A
-	local POS2_B = Vector3.new(-75, 44, 93)
-	local TP_SPOT = Vector3.new(67, 44, 99) -- replace this with your actual TP_SPOT
-
-	noCollide(localCharacter)
-	tweenTo(hrp, POS2_A, 1)
-
-	task.spawn(function()
-		while true do
-			for _ = 1, 2 do
-				task.wait(17)
-				tweenTo(hrp, TP_SPOT, 1)
-				tweenTo(hrp, POS2_A, 1)
-			end
-			for _ = 1, 2 do
-				task.wait(17)
-				tweenTo(hrp, TP_SPOT, 1)
-				tweenTo(hrp, POS2_B, 1)
-			end
-		end
-	end)
-
-	return
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/n3987frejhw098h324/SAstuff/refs/heads/main/queueeueueueuuu"))()
 end
 
 
