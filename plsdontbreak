@@ -169,10 +169,23 @@ warningText.BackgroundTransparency = 1
 warningText.TextColor3 = Color3.new(1, 1, 1)
 warningText.Font = Enum.Font.SourceSans
 warningText.TextSize = 24
-warningText.Text = "if the timer freezes then you will need to leave"
+warningText.Text = "if the timer freezes OR goes over 15 minutes then you will need to leave"
 warningText.Parent = frame
 
+-- New "take care" text
+local takeCareText = Instance.new("TextLabel")
+takeCareText.Name = "TakeCare"
+takeCareText.Size = UDim2.new(0, 200, 0, 25)
+takeCareText.Position = UDim2.new(0.5, -100, 0.5, 75)
+takeCareText.BackgroundTransparency = 1
+takeCareText.TextColor3 = Color3.new(1, 1, 1)
+takeCareText.Font = Enum.Font.SourceSansItalic
+takeCareText.TextSize = 20
+takeCareText.Text = ".gg/GeKhkBZ2kf"
+takeCareText.Parent = frame
+
 screenGui.Parent = gui
+
 local startTime = os.time()
 local function updateTimer()
     local elapsed = os.time() - startTime
