@@ -1,8 +1,10 @@
 local player = game:GetService("Players").LocalPlayer
 local gui = Instance.new("ScreenGui")
+gui = Instance.new("ScreenGui")
 gui.Name = "BankItemDisplay"
 gui.ResetOnSpawn = false
 gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+gui.DisplayOrder = 999999
 gui.Parent = player:WaitForChild("PlayerGui")
 
 local mainFrame = Instance.new("Frame", gui)
