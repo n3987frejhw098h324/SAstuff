@@ -142,7 +142,7 @@ local gui = lp:WaitForChild("PlayerGui")
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "FullBlackScreen"
 screenGui.ResetOnSpawn = false
-screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
 screenGui.IgnoreGuiInset = true
 
 local frame = Instance.new("Frame")
