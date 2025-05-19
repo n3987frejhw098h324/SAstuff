@@ -3,56 +3,15 @@ local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 local TeleportService = game:GetService("TeleportService")
 local HttpService = game:GetService("HttpService")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local speaker = Players.LocalPlayer
 local character = speaker.Character or speaker.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
 local root = character:WaitForChild("HumanoidRootPart")
-
-for _, child in ipairs(workspace:GetChildren()) do
-	if speaker.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then
-		humanoid:EquipTool(child)
-	end
-end
-
-if grabtoolsFunc then grabtoolsFunc:Disconnect() end
-
-grabtoolsFunc = workspace.ChildAdded:Connect(function(child)
-	if speaker.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then
-		humanoid:EquipTool(child)
-	end
-end)
-
-task.wait(1)
-
-local keyTool = speaker.Backpack:FindFirstChild("Uncanny Key")
-local hadKeyInitially = keyTool ~= nil
-
-if not keyTool then
-	local slots = Players.LocalPlayer.PlayerGui:WaitForChild("BankNEW")
-		.Right.ImageLabel.ItemSlots:WaitForChild("Slots")
-
-	for i = 1, 8 do
-		local slotName = "Slot" .. tostring(i)
-		local slot = slots:FindFirstChild(slotName)
-		if slot and slot:FindFirstChild("ItemName") and slot.ItemName.Value == "Uncanny Key" then
-			local args = { slotName, true, 1 }
-			ReplicatedStorage:WaitForChild("Bank"):FireServer(unpack(args))
-			task.wait(0.5)
-			keyTool = speaker.Backpack:FindFirstChild("Uncanny Key")
-			if keyTool then
-				humanoid:EquipTool(keyTool)
-			end
-			break
-		end
-	end
-end
 
 local dwayne = workspace:FindFirstChild("Map") and workspace.Map:FindFirstChild("Arena") and workspace.Map.Arena:FindFirstChild("Dwayne")
 local dwaynePos = Vector3.new(1124.9949951171875, 590.0040283203125, -772.2570190429688)
 
-if dwayne and dwayne.Position == dwaynePos and not speaker.Backpack:FindFirstChild("Uncanny Key") then
+if dwayne and dwayne.Position == dwaynePos then
 	local function ListServers(cursor)
 		local url = ("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Asc&limit=10%s"):format(game.PlaceId, cursor and "&cursor=" .. cursor or "")
 		local raw = game:HttpGet(url)
@@ -64,11 +23,11 @@ if dwayne and dwayne.Position == dwaynePos and not speaker.Backpack:FindFirstChi
 
 	if root then root.Anchored = true end
 	TeleportService:TeleportToPlaceInstance(game.PlaceId, server.id, speaker)
-	return -- STOP everything else
+	return
 end
 
 root.CFrame = CFrame.new(1101, 586, -731)
-task.wait(keyTool and 10 or 3)
+task.wait(3)
 
 local tween = TweenService:Create(root, TweenInfo.new(1.5, Enum.EasingStyle.Linear), {CFrame = CFrame.new(1126, 590, -780)})
 tween:Play()
@@ -82,13 +41,11 @@ local function ListServers(cursor)
 	return HttpService:JSONDecode(raw)
 end
 
-local time_to_wait = 5
-while task.wait(time_to_wait) do
+while task.wait(5) do
 	if root then root.Anchored = true end
 
 	local servers = ListServers()
 	local server = servers.data[math.random(1, #servers.data)]
 
-	if root then root.Anchored = true end
 	TeleportService:TeleportToPlaceInstance(game.PlaceId, server.id, speaker)
 end
