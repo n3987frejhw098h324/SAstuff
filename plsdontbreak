@@ -135,6 +135,46 @@ task.spawn(function()
     end)
 end)
 
+local gui = lp:WaitForChild("PlayerGui")
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "FullBlackScreen"
+screenGui.ResetOnSpawn = false
+screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+screenGui.IgnoreGuiInset = true
+
+local frame = Instance.new("Frame")
+frame.Name = "BlackFrame"
+frame.Size = UDim2.new(1, 0, 1, 0)
+frame.BackgroundColor3 = Color3.new(0, 0, 0)
+frame.BorderSizePixel = 0
+frame.Parent = screenGui
+
+local timerText = Instance.new("TextLabel")
+timerText.Name = "Timer"
+timerText.Size = UDim2.new(0, 200, 0, 50)
+timerText.Position = UDim2.new(0.5, -100, 0.5, -25)
+timerText.BackgroundTransparency = 1
+timerText.TextColor3 = Color3.new(1, 1, 1)
+timerText.Font = Enum.Font.SourceSansBold
+timerText.TextSize = 48
+timerText.Text = "00:00"
+timerText.Parent = frame
+
+screenGui.Parent = gui
+local startTime = os.time()
+local function updateTimer()
+    local elapsed = os.time() - startTime
+    local minutes = math.floor(elapsed / 60)
+    local seconds = elapsed % 60
+    timerText.Text = string.format("%02d:%02d", minutes, seconds)
+end
+
+while true do
+    updateTimer()
+    wait(1)
+end
+
 task.spawn(function()
     local function storeItem(item)
         item.Parent = c
