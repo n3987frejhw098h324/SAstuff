@@ -1,0 +1,45 @@
+local player = game:GetService("Players").LocalPlayer
+local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+gui.Name = "BankItemDisplay"
+gui.ResetOnSpawn = false
+
+local mainFrame = Instance.new("Frame", gui)
+mainFrame.Size = UDim2.new(0, 400, 0, 100)
+mainFrame.Position = UDim2.new(0.5, -200, 0.3, 0) -- slightly above center
+mainFrame.BackgroundTransparency = 1
+
+-- Create 8 squares (TextLabels)
+for i = 1, 8 do
+	local slotLabel = Instance.new("TextLabel")
+	slotLabel.Name = "Slot" .. i
+	slotLabel.Size = UDim2.new(0, 45, 0, 45)
+	slotLabel.Position = UDim2.new(0, (i - 1) * 50, 0, 0)
+	slotLabel.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+	slotLabel.BorderSizePixel = 1
+	slotLabel.BorderColor3 = Color3.fromRGB(90, 90, 90)
+	slotLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+	slotLabel.TextScaled = true
+	slotLabel.Font = Enum.Font.SourceSansSemibold
+	slotLabel.Text = "..."
+
+	slotLabel.Parent = mainFrame
+
+	-- Update the slot label text with item name
+	task.spawn(function()
+		while true do
+			pcall(function()
+				local slot = player.PlayerGui:FindFirstChild("BankNEW")
+					and player.PlayerGui.BankNEW.Right.ImageLabel.ItemSlots.Slots:FindFirstChild(tostring(i))
+				if slot then
+					local itemNameVal = slot:FindFirstChild("ItemName")
+					if itemNameVal and itemNameVal:IsA("StringValue") then
+						slotLabel.Text = itemNameVal.Value
+					else
+						slotLabel.Text = "..."
+					end
+				end
+			end)
+			task.wait(1)
+		end
+	end)
+end
