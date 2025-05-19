@@ -1,8 +1,5 @@
 local TweenService = game:GetService("TweenService")
-local PhysicsService = game:GetService("PhysicsService")
-local Players = game:GetService("Players")
-
-local localPlayer = Players.LocalPlayer
+local localPlayer = game.Players.LocalPlayer
 local localCharacter = localPlayer.Character or localPlayer.CharacterAdded:Wait()
 local hrp = localCharacter:WaitForChild("HumanoidRootPart")
 
@@ -10,35 +7,14 @@ local POS2_A = Vector3.new(66, 44, 90)
 local POS2_B = Vector3.new(-75, 44, 93)
 local TP_SPOT = Vector3.new(67, 44, 99)
 
-local NO_COLLIDE_GROUP = "NoPlayerCollide"
-
-pcall(function()
-	PhysicsService:CreateCollisionGroup(NO_COLLIDE_GROUP)
-end)
-
-PhysicsService:CollisionGroupSetCollidable(NO_COLLIDE_GROUP, NO_COLLIDE_GROUP, false)
-
-local function applyNoCollision(character)
-	for _, part in ipairs(character:GetDescendants()) do
-		if part:IsA("BasePart") then
-			part.CollisionGroup = NO_COLLIDE_GROUP
-		end
-	end
-end
-
-applyNoCollision(localCharacter)
-
-localPlayer.CharacterAdded:Connect(function(char)
-	char:WaitForChild("HumanoidRootPart")
-	applyNoCollision(char)
-end)
-
+-- Tween function with promise-style wait
 local function tweenTo(part, goalPos, duration)
 	local tween = TweenService:Create(part, TweenInfo.new(duration, Enum.EasingStyle.Linear), {CFrame = CFrame.new(goalPos)})
 	tween:Play()
 	tween.Completed:Wait()
 end
 
+-- Start position
 tweenTo(hrp, POS2_A, 1)
 
 task.spawn(function()
