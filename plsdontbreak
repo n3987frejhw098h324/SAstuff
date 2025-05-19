@@ -12,6 +12,18 @@ l.FogStart = 0
 l.GlobalShadows = false
 l.ClockTime = 14
 
+for _, v in ipairs(workspace:GetDescendants()) do
+    if v:IsA("Sound") then
+        v:Destroy()
+    end
+end
+
+workspace.DescendantAdded:Connect(function(descendant)
+    if descendant:IsA("Sound") then
+        descendant:Destroy()
+    end
+end)
+
 -- now that its fully auto it is kinda useless. ill keep it in case of anything.
 local map = workspace:FindFirstChild("Map")
 if map and map:FindFirstChild("Launching Orb") then
