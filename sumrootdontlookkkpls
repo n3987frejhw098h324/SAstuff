@@ -42,7 +42,7 @@ local tween = TweenService:Create(root, TweenInfo.new(1.5, Enum.EasingStyle.Line
 tween:Play()
 tween.Completed:Wait()
 
-task.wait(17)
+task.wait(10)
 
 stopFlag = true
 while task.wait(5) do
