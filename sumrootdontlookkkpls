@@ -10,7 +10,6 @@ local character = speaker.Character or speaker.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
 local root = character:WaitForChild("HumanoidRootPart")
 
--- Grab all tools in workspace and equip them
 for _, child in ipairs(workspace:GetChildren()) do
 	if speaker.Character and child:IsA("BackpackItem") and child:FindFirstChild("Handle") then
 		humanoid:EquipTool(child)
@@ -27,11 +26,9 @@ end)
 
 task.wait(1)
 
--- Check for "Uncanny Key" in backpack
 local keyTool = speaker.Backpack:FindFirstChild("Uncanny Key")
 local hadKeyInitially = keyTool ~= nil
 
--- If key not in backpack, check bank slots
 if not keyTool then
 	local slots = Players.LocalPlayer.PlayerGui:WaitForChild("BankNEW")
 		.Right.ImageLabel.ItemSlots:WaitForChild("Slots")
@@ -52,12 +49,10 @@ if not keyTool then
 	end
 end
 
--- === DWAYNE CHECK ===
 local dwayne = workspace:FindFirstChild("Map") and workspace.Map:FindFirstChild("Arena") and workspace.Map.Arena:FindFirstChild("Dwayne")
 local dwaynePos = Vector3.new(1124.9949951171875, 590.0040283203125, -772.2570190429688)
 
 if dwayne and dwayne.Position == dwaynePos and not speaker.Backpack:FindFirstChild("Uncanny Key") then
-	-- Serverhop now
 	local function ListServers(cursor)
 		local url = ("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Asc&limit=10%s"):format(game.PlaceId, cursor and "&cursor=" .. cursor or "")
 		local raw = game:HttpGet(url)
@@ -72,28 +67,22 @@ if dwayne and dwayne.Position == dwaynePos and not speaker.Backpack:FindFirstChi
 	return -- STOP everything else
 end
 
--- Move to front of cave
 root.CFrame = CFrame.new(1101, 586, -731)
-
--- Wait based on key presence
 task.wait(keyTool and 10 or 5)
 
--- Tween into cave
 local tween = TweenService:Create(root, TweenInfo.new(1.5, Enum.EasingStyle.Linear), {CFrame = CFrame.new(1126, 590, -780)})
 tween:Play()
 tween.Completed:Wait()
 
--- Wait for teleport after entering cave
-task.wait(10)
+task.wait(17)
 
--- === Serverhop Loop ===
 local function ListServers(cursor)
 	local url = ("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Asc&limit=10%s"):format(game.PlaceId, cursor and "&cursor=" .. cursor or "")
 	local raw = game:HttpGet(url)
 	return HttpService:JSONDecode(raw)
 end
 
-local time_to_wait = 8
+local time_to_wait = 1
 while task.wait(time_to_wait) do
 	if root then root.Anchored = true end
 
