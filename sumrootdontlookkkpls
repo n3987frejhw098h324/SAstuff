@@ -44,7 +44,7 @@ if not keyTool then
 			if keyTool then
 				humanoid:EquipTool(keyTool)
 			end
-			break -- Only grab one key!
+			break
 		end
 	end
 end
@@ -68,7 +68,7 @@ if dwayne and dwayne.Position == dwaynePos and not speaker.Backpack:FindFirstChi
 end
 
 root.CFrame = CFrame.new(1101, 586, -731)
-task.wait(keyTool and 10 or 5)
+task.wait(keyTool and 10 or 3)
 
 local tween = TweenService:Create(root, TweenInfo.new(1.5, Enum.EasingStyle.Linear), {CFrame = CFrame.new(1126, 590, -780)})
 tween:Play()
