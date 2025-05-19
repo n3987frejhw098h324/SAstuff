@@ -29,7 +29,7 @@ local stopFlag = false
 task.spawn(function()
 	while not stopFlag do
 		local dwayne = workspace:FindFirstChild("Map") and workspace.Map:FindFirstChild("Arena") and workspace.Map.Arena:FindFirstChild("Dwayne")
-		if dwayne and dwayne.Position == dwaynePos then
+		if dwayne and (dwayne.Position - dwaynePos).Magnitude <= 1 then
 			TeleportRandomServer()
 			return
 		end
