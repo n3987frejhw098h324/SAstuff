@@ -19,7 +19,7 @@ if map and map:FindFirstChild("Launching Orb") then
 end
 
 nocd = hookfunction(wait, function(s)
-    return nocd(0)
+    return nocd(0.1) --possibly a fix for mobile
 end)
 
 local p = game:GetService("Players")
