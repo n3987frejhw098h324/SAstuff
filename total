@@ -5,6 +5,10 @@ local TweenService    = game:GetService("TweenService")
 
 repeat task.wait() until game:IsLoaded()
 
+for _,v in pairs(getconnections(game.Players.LocalPlayer.Idled)) do
+    v:Disable()
+end
+
 local localPlayer = Players.LocalPlayer
 
 local function tweenTo(hrp, position, time)
