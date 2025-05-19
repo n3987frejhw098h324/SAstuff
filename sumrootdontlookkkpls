@@ -13,7 +13,7 @@ local root = character:WaitForChild("HumanoidRootPart")
 local dwaynePos = Vector3.new(1124.9949951171875, 590.0040283203125, -772.2570190429688)
 
 local joinTime = tick()
-local TIMEOUT = 120
+local TIMEOUT = 60
 
 local function ListServers(cursor)
 	local url = ("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Asc&limit=10%s"):format(game.PlaceId, cursor and "&cursor=" .. cursor or "")
