@@ -1,4 +1,4 @@
-wait(3)
+wait(6)
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 local TeleportService = game:GetService("TeleportService")
@@ -23,7 +23,6 @@ local function TeleportRandomServer()
 	TeleportService:TeleportToPlaceInstance(game.PlaceId, server.id, speaker)
 end
 
--- Dwayne watcher
 local stopFlag = false
 task.spawn(function()
 	while not stopFlag do
@@ -36,7 +35,6 @@ task.spawn(function()
 	end
 end)
 
--- Do regular script flow
 root.CFrame = CFrame.new(1101, 586, -731)
 task.wait(3)
 
@@ -46,8 +44,8 @@ tween.Completed:Wait()
 
 task.wait(17)
 
-stopFlag = true -- Stop checking Dwayne after the wait
-while task.wait(5) do
+stopFlag = true
+while task.wait(2) do
 	if root then root.Anchored = true end
 	TeleportRandomServer()
 end
