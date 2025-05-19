@@ -47,11 +47,6 @@ if map and map:FindFirstChild("Launching Orb") then
     map["Launching Orb"]:Destroy()
 end
 
--- anti afk lol
-for _,v in pairs(getconnections(game.Players.LocalPlayer.Idled)) do
-    v:Disable()
-end
-
 nocd = hookfunction(wait, function(s)
     return nocd(0)
 end)
