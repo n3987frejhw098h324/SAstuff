@@ -36,13 +36,13 @@ task.spawn(function()
 end)
 
 root.CFrame = CFrame.new(1101, 586, -731)
-task.wait(3)
+wait(1.5)
 
 local tween = TweenService:Create(root, TweenInfo.new(1.5, Enum.EasingStyle.Linear), {CFrame = CFrame.new(1126, 590, -780)})
 tween:Play()
 tween.Completed:Wait()
 
-task.wait(10)
+wait(10)
 
 stopFlag = true
 while task.wait(5) do
