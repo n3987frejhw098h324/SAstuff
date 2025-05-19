@@ -5,46 +5,6 @@ if rs:FindFirstChild("CameraShaker") then
     rs.CameraShaker:Destroy()
 end
 
-pcall(function()
-    local gui = Instance.new("ScreenGui")
-    gui.Name = "Blackscreen"
-    gui.IgnoreGuiInset = true
-    gui.ResetOnSpawn = false
-    gui.DisplayOrder = 999999
-    gui.ZIndexBehavior = Enum.ZIndexBehavior.Global
-    gui.Parent = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
-
-    local frame = Instance.new("Frame")
-    frame.Size = UDim2.new(1, 0, 1, 0)
-    frame.BackgroundColor3 = Color3.new(0, 0, 0)
-    frame.BorderSizePixel = 0
-    frame.ZIndex = 10
-    frame.Parent = gui
-
-    local label = Instance.new("TextLabel")
-    label.AnchorPoint = Vector2.new(0.5, 0.5)
-    label.Position = UDim2.new(0.5, 0, 0.5, 0)
-    label.Size = UDim2.new(0, 500, 0, 50)
-    label.TextColor3 = Color3.new(1, 1, 1)
-    label.BackgroundTransparency = 1
-    label.Font = Enum.Font.SourceSansBold
-    label.TextSize = 32
-    label.ZIndex = 11
-    label.Parent = frame
-    label.Text = "u pmo"
-
-    -- Start the timer
-    local time = 0
-    while true do
-        -- Update the label text
-        label.Text = "Time: " .. time
-        -- Increment time every second
-        time = time + 1
-        wait(1) -- Wait for 1 second
-    end
-end)
-
-
 local l = game:GetService("Lighting")
 l.Brightness = 2
 l.FogEnd = 999999
