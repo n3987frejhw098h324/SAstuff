@@ -38,7 +38,7 @@ game:GetService("RunService").Heartbeat:Connect(function()
     local elapsedTime = tick() - startTime
     local minutes = math.floor(elapsedTime / 60)
     local seconds = math.floor(elapsedTime % 60) 
-    label.Text = string.format("[[%02d:%02d]] // takes around 4-7 minutes", minutes, seconds)
+    label.Text = string.format("[[%02d:%02d]] /\/\ takes around 4-7 minutes", minutes, seconds)
 end)
 
 local l = game:GetService("Lighting")
