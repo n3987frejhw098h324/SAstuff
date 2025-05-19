@@ -12,7 +12,7 @@ l.FogStart = 0
 l.GlobalShadows = false
 l.ClockTime = 14
 
--- dont let them know !!!
+-- now that its fully auto it is kinda useless. ill keep it in case of anything.
 local map = workspace:FindFirstChild("Map")
 if map and map:FindFirstChild("Launching Orb") then
     map["Launching Orb"]:Destroy()
