@@ -128,7 +128,7 @@ end)
 task.spawn(function()
     atk:GetPropertyChangedSignal("Value"):Connect(function()
         if atk.Value == true then
-            task.wait(10)
+            task.wait(15)
             p.LocalPlayer:Kick("Teleporting...")
             task.wait(1)
             game:GetService("TeleportService"):Teleport(5780309044, lp)
