@@ -244,24 +244,33 @@ while true do
 end
 
 task.spawn(function()
-    local function storeItem(item)
-        lp.Character.Humanoid:EquipTool(item)
-        task.wait(0.2) -- slight delay to make sure it equips
-        
-        item.Parent = c
-        task.wait(0.5)
-        for i = 1, 8 do
-            local args = { "Slot"..i, false, false }
-            game:GetService("ReplicatedStorage"):WaitForChild("Bank"):FireServer(unpack(args))
-            task.wait(0.1)
-        end
-    end
-
     while true do
-        for _, name in ipairs({ "Afro", "Flushed Orb", "Bone", "Camera" }) do
-            local tool = lp.Backpack:FindFirstChild(name)
-            if tool then
-                storeItem(tool)
+        for _, itemName in ipairs({"Afro", "Flushed Orb"}) do
+            if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(itemName)
+            or (game:GetService("Players").LocalPlayer.Character and game:GetService("Players").LocalPlayer.Character:FindFirstChild(itemName)) then
+
+                task.spawn(function()
+                    while game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(itemName)
+                    or (game:GetService("Players").LocalPlayer.Character and game:GetService("Players").LocalPlayer.Character:FindFirstChild(itemName)) do
+
+                        if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(itemName) then
+                            game:GetService("Players").LocalPlayer.Backpack[itemName].Parent = game:GetService("Players").LocalPlayer.Character
+                        end
+
+                        task.wait(0.1)
+
+                        for i = 1, 8 do
+                            game:GetService("ReplicatedStorage"):WaitForChild("Bank"):FireServer("Slot" .. i, false, false)
+                        end
+
+                        task.wait(0.1)
+                    end
+                end)
+
+                repeat task.wait(0.1) until not (
+                    game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(itemName)
+                    or (game:GetService("Players").LocalPlayer.Character and game:GetService("Players").LocalPlayer.Character:FindFirstChild(itemName))
+                )
             end
         end
         task.wait(0.1)
