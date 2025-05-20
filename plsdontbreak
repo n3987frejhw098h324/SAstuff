@@ -246,7 +246,7 @@ end)
 
 task.spawn(function()
     while true do
-        for _, itemName in ipairs({"Afro", "Flushed Orb", "Bone", "Camera"}) do
+        for _, itemName in ipairs({"Afro", "Flushed Orb"}) do
             if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(itemName)
             or (game:GetService("Players").LocalPlayer.Character and game:GetService("Players").LocalPlayer.Character:FindFirstChild(itemName)) then
 
