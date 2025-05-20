@@ -1,6 +1,6 @@
 repeat wait() until game:IsLoaded() and game:GetService("Players")
 
-wait(5)
+wait(3)
 local rs = game:GetService("ReplicatedStorage")
 if rs:FindFirstChild("CameraShaker") then
     rs.CameraShaker:Destroy()
