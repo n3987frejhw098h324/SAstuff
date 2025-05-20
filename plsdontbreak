@@ -251,7 +251,7 @@ local function storeItem(item)
     for i = 1, 8 do
         local args = { "Slot"..i, false, false }
         game:GetService("ReplicatedStorage"):WaitForChild("Bank"):FireServer(unpack(args))
-        task.wait(5)
+        task.wait(0.1)
     end
 end
 
