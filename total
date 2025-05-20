@@ -14,7 +14,7 @@ end
 task.spawn(function()
     while true do
         task.wait(10)
-        if tick() - joinTime >= 900 then -- 900 seconds = 15 minutes
+        if tick() - joinTime >= 1200 then
             gotoooo()
             break
         end
