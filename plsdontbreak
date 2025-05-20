@@ -247,7 +247,7 @@ task.spawn(function()
 local function storeItem(item)
     item.Parent = c
     c:FindFirstChildOfClass("Humanoid"):EquipTool(item)
-    task.wait(2)
+    task.wait(0.5)
     for i = 1, 8 do
         local args = { "Slot"..i, false, false }
         game:GetService("ReplicatedStorage"):WaitForChild("Bank"):FireServer(unpack(args))
