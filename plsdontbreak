@@ -136,15 +136,6 @@ task.spawn(function()
     end)
 end)
 
-
-game.Players.LocalPlayer.CharacterAdded:Connect(function(char)
-    char:WaitForChild("Humanoid").Died:Connect(function()
-        task.delay(3, function()
-            game:GetService("TeleportService"):Teleport(5780309044)
-        end)
-    end)
-end)
-
 local gui = lp:WaitForChild("PlayerGui")
 
 local screenGui = Instance.new("ScreenGui")
