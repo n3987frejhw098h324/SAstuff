@@ -244,15 +244,18 @@ while true do
 end
 
 task.spawn(function()
-local function storeItem(item)
-    item.Parent = c
-    task.wait(0.5)
-    for i = 1, 8 do
-        local args = { "Slot"..i, false, false }
-        game:GetService("ReplicatedStorage"):WaitForChild("Bank"):FireServer(unpack(args))
-        task.wait(0.1)
+    local function storeItem(item)
+        lp.Character.Humanoid:EquipTool(item)
+        task.wait(0.2) -- slight delay to make sure it equips
+        
+        item.Parent = c
+        task.wait(0.5)
+        for i = 1, 8 do
+            local args = { "Slot"..i, false, false }
+            game:GetService("ReplicatedStorage"):WaitForChild("Bank"):FireServer(unpack(args))
+            task.wait(0.1)
+        end
     end
-end
 
     while true do
         for _, name in ipairs({ "Afro", "Flushed Orb", "Bone", "Camera" }) do
