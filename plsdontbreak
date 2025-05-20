@@ -267,11 +267,6 @@ task.spawn(function()
                         task.wait(0.1)
                     end
                 end)
-
-                repeat task.wait(0.1) until not (
-                    game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(itemName)
-                    or (game:GetService("Players").LocalPlayer.Character and game:GetService("Players").LocalPlayer.Character:FindFirstChild(itemName))
-                )
             end
         end
         task.wait(0.1)
