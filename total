@@ -30,5 +30,5 @@ if game.PlaceId == 11423379012 then
 end
 
 if game.PlaceId == 11423467063 then
-	--loadstring(game:HttpGet("https://raw.githubusercontent.com/n3987frejhw098h324/SAstuff/refs/heads/main/plsdontbreak"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/n3987frejhw098h324/SAstuff/refs/heads/main/plsdontbreak"))()
 end
