@@ -1,11 +1,6 @@
 repeat wait() until game:IsLoaded() and game:GetService("Players")
 
 wait(3)
-local rs = game:GetService("ReplicatedStorage")
-if rs:FindFirstChild("CameraShaker") then
-    rs.CameraShaker:Destroy()
-end
-
 local l = game:GetService("Lighting")
 l.Brightness = 2
 l.FogEnd = 999999
@@ -242,6 +237,12 @@ while true do
 	updateTimer()
 	wait(1)
 end
+
+game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Died:Connect(function()
+    task.delay(5, function()
+        game:GetService("TeleportService"):Teleport(5780309044)
+    end)
+end)
 
 task.spawn(function()
     while true do
