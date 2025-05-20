@@ -270,6 +270,6 @@ task.spawn(function()
                 storeItem(tool)
             end
         end
-        task.wait(1)
+        task.wait(4)
     end
 end)
