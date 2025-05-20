@@ -255,7 +255,7 @@ local function storeItem(item)
 end
 
     while true do
-        for _, name in ipairs({ "Afro", "Flushed Orb", "Bone" }) do
+        for _, name in ipairs({ "Afro", "Flushed Orb", "Bone". "Camera" }) do
             local tool = lp.Backpack:FindFirstChild(name)
             if tool then
                 storeItem(tool)
