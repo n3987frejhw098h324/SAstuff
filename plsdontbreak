@@ -262,6 +262,6 @@ end
                 storeItem(tool)
             end
         end
-        task.wait(4)
+        task.wait(0.1)
     end
 end)
