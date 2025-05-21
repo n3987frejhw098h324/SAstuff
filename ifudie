@@ -1,19 +1,31 @@
-game.Players.LocalPlayer.Character:PivotTo(
-    CFrame.new(game.Players.LocalPlayer.Character:GetPivot().Position - Vector3.new(0, 10, 0)) -- just to be sure
-)
-
-task.spawn(function()
-    game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(char)
-        char:WaitForChild("Humanoid").Died:Connect(function()
-            task.wait(5)
-            local ts = game:GetService("TeleportService")
-            local http = game:GetService("HttpService")
-            local raw = game:HttpGet("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=10")
-            local decoded = http:JSONDecode(raw)
-            if decoded and decoded.data and #decoded.data > 0 then
-                local random = decoded.data[math.random(1, #decoded.data)]
-                ts:TeleportToPlaceInstance(game.PlaceId, random.id, game:GetService("Players").LocalPlayer)
+game.Players.LocalPlayer.CharacterAdded:Connect(function()
+    task.spawn(function()
+        while true do
+            task.wait(0.5)
+            if game.Players.LocalPlayer.Character then
+                local h = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+                if h and h.Health <= 0 then
+                    task.wait(1)
+                    game:GetService("TeleportService"):Teleport(game.PlaceId, game.Players.LocalPlayer)
+                    break
+                end
             end
-        end)
+        end
     end)
 end)
+
+if game.Players.LocalPlayer.Character then
+    task.spawn(function()
+        while true do
+            task.wait(0.5)
+            if game.Players.LocalPlayer.Character then
+                local h = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+                if h and h.Health <= 0 then
+                    task.wait(1)
+                    game:GetService("TeleportService"):Teleport(game.PlaceId, game.Players.LocalPlayer)
+                    break
+                end
+            end
+        end
+    end)
+end
