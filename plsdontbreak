@@ -18,7 +18,7 @@ nocd = hookfunction(wait, function(s)
     return nocd(0)
 end)
 
-game:GetService("Players").LocalPlayer:WaitForChild("PlayerScripts"):FindFirstChild("Client2"):Destroy()
+--game:GetService("Players").LocalPlayer:WaitForChild("PlayerScripts"):FindFirstChild("Client2"):Destroy()
 
 local p = game:GetService("Players")
 local lp = p.LocalPlayer
