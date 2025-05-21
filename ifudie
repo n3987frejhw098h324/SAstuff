@@ -1,0 +1,15 @@
+task.spawn(function()
+    game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(char)
+        char:WaitForChild("Humanoid").Died:Connect(function()
+            task.wait(5)
+            local ts = game:GetService("TeleportService")
+            local http = game:GetService("HttpService")
+            local raw = game:HttpGet("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=10")
+            local decoded = http:JSONDecode(raw)
+            if decoded and decoded.data and #decoded.data > 0 then
+                local random = decoded.data[math.random(1, #decoded.data)]
+                ts:TeleportToPlaceInstance(game.PlaceId, random.id, game:GetService("Players").LocalPlayer)
+            end
+        end)
+    end)
+end)
