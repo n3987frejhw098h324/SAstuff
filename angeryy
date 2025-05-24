@@ -1,4 +1,17 @@
 wait(5)
+spawn(function()
+	for i = 1, 25 do
+		local p = game.Players.LocalPlayer
+		local c = p.Character or p.CharacterAdded:Wait()
+		local hrp = c:FindFirstChild("HumanoidRootPart")
+		if hrp then
+			hrp.CFrame = hrp.CFrame * CFrame.Angles(0, math.rad(90), 0)
+		end
+		task.wait(0.2)
+	end
+end)
+
+
 game:GetService("RunService").RenderStepped:Connect(function()
     pcall(function()
         local plr = game.Players.LocalPlayer
