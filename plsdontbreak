@@ -159,8 +159,29 @@ task.spawn(function()
     end)
 end)
 
-local p = game:GetService("Players")
-local lp = p.LocalPlayer
+-- ts the uhh aiming thing
+task.spawn(function()
+    while true do
+        game:GetService("RunService").RenderStepped:Wait()
+        if not c or not c:FindFirstChild("HumanoidRootPart") or not workspace:FindFirstChild("TrollPrism") then continue end
+        local p = c.HumanoidRootPart.Position
+        local tp = workspace.TrollPrism.Position
+        c.HumanoidRootPart.CFrame = CFrame.lookAt(p, tp)
+        task.wait(0.2)
+        if not c or not c:FindFirstChild("HumanoidRootPart") or not workspace:FindFirstChild("TrollPrism") then continue end
+        local p2 = c.HumanoidRootPart.Position
+        local tp2 = workspace.TrollPrism.Position
+        local d = (tp2 - p2).Unit
+        local rotated = Vector3.new(
+            d.X * math.cos(math.rad(45)) - d.Z * math.sin(math.rad(45)),
+            d.Y,
+            d.X * math.sin(math.rad(45)) + d.Z * math.cos(math.rad(45))
+        )
+        c.HumanoidRootPart.CFrame = CFrame.lookAt(p2, p2 + rotated)
+        task.wait(0.05)
+    end
+end)
+
 local gui = lp:WaitForChild("PlayerGui")
 
 local screenGui = Instance.new("ScreenGui")
