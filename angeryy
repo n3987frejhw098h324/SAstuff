@@ -6,7 +6,7 @@ spawn(function()
 		if hrp then
 			hrp.CFrame = hrp.CFrame * CFrame.Angles(0, math.rad(90), 0)
 		end
-		task.wait(0.2)
+		task.wait(0.1)
 	end
 end)
 
