@@ -271,14 +271,15 @@ local function updateTimer()
 	local seconds = elapsed % 60
 	timerText.Text = string.format("%02d:%02d", minutes, seconds)
 
-	pcall(function()
-		if workspace:FindFirstChild("TrollHealth") and workspace.TrollHealth:IsA("NumberValue") then
-			bossHPText.Text = "Boss HP: " .. workspace.TrollHealth.Value
-		else
-			bossHPText.Text = "Boss HP: ???"
-		end
-	end)
-end
+pcall(function()
+	local hp = workspace:FindFirstChild("TrollHealth")
+	if hp and hp:IsA("NumberValue") then
+		bossHPText.Text = "Boss HP: " .. hp.Value
+	else
+		bossHPText.Text = "Boss HP: ???"
+	end
+end)
+end --ts pmo
 
 while true do
 	updateTimer()
