@@ -14,8 +14,6 @@ if map and map:FindFirstChild("Launching Orb") then
     map["Launching Orb"]:Destroy()
 end
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/n3987frejhw098h324/SAstuff/refs/heads/main/aimss"))
-
 game:GetService("RunService").RenderStepped:Connect(function()
     pcall(function()
         game.Players.LocalPlayer.Character.Animate.Disabled = true
@@ -159,6 +157,25 @@ task.spawn(function()
     end)
 end)
 
+game:GetService("RunService").RenderStepped:Connect(function()
+    pcall(function()
+        local animate = char and char:FindFirstChild("Animate")
+
+        if h and hrp then
+            if animate then
+                animate.Disabled = true
+            end
+
+            for _, track in ipairs(hum:GetPlayingAnimationTracks()) do
+                track:Stop()
+            end
+
+            h:ChangeState(11)
+            hrp.CFrame = hrp.CFrame
+        end
+    end)
+end)
+
 -- ts the uhh aiming thing
 task.spawn(function()
     while true do
@@ -178,7 +195,7 @@ task.spawn(function()
             d.X * math.sin(math.rad(45)) + d.Z * math.cos(math.rad(45))
         )
         c.HumanoidRootPart.CFrame = CFrame.lookAt(p2, p2 + rotated)
-        task.wait(0.05)
+        task.wait(0.001)
     end
 end)
 
