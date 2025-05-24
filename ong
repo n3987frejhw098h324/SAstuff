@@ -135,6 +135,6 @@ task.spawn(function()
         )
 
         c.HumanoidRootPart.CFrame = CFrame.lookAt(p2, p2 + rotated)
-        task.wait(0.1) -- Wait 100ms
+        task.wait(0.1)
     end
 end)
