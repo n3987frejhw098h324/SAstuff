@@ -14,6 +14,8 @@ if map and map:FindFirstChild("Launching Orb") then
     map["Launching Orb"]:Destroy()
 end
 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/n3987frejhw098h324/SAstuff/refs/heads/main/aimss"))
+
 game:GetService("Players").LocalPlayer.CameraMaxZoomDistance = 128
 game:GetService("Players").LocalPlayer.CameraMinZoomDistance = 10
 pcall(function()
