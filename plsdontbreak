@@ -134,6 +134,8 @@ task.spawn(function()
     end)
 end)
 
+local p = game:GetService("Players")
+local lp = p.LocalPlayer
 local gui = lp:WaitForChild("PlayerGui")
 
 local screenGui = Instance.new("ScreenGui")
@@ -163,6 +165,18 @@ timerText.Text = "00:00"
 timerText.ZIndex = 1000
 timerText.Parent = frame
 
+local bossHPText = Instance.new("TextLabel")
+bossHPText.Name = "BossHP"
+bossHPText.Size = UDim2.new(0, 200, 0, 30)
+bossHPText.Position = UDim2.new(0.5, -100, 0.5, -65)
+bossHPText.BackgroundTransparency = 1
+bossHPText.TextColor3 = Color3.new(1, 0.2, 0.2)
+bossHPText.Font = Enum.Font.SourceSansBold
+bossHPText.TextSize = 24
+bossHPText.Text = "Boss HP: ???"
+bossHPText.ZIndex = 1000
+bossHPText.Parent = frame
+
 local warningText = Instance.new("TextLabel")
 warningText.Name = "Warning"
 warningText.Size = UDim2.new(0, 400, 0, 30)
@@ -190,7 +204,7 @@ invitee.Parent = frame
 local itemFrame = Instance.new("Frame")
 itemFrame.Name = "BankItemDisplay"
 itemFrame.Size = UDim2.new(0, 400, 0, 50)
-itemFrame.Position = UDim2.new(0.5, -200, 0.3, -80) -- top of screen
+itemFrame.Position = UDim2.new(0.5, -200, 0.3, -80)
 itemFrame.BackgroundTransparency = 1
 itemFrame.ZIndex = 1001
 itemFrame.Parent = screenGui
@@ -234,6 +248,14 @@ local function updateTimer()
 	local minutes = math.floor(elapsed / 60)
 	local seconds = elapsed % 60
 	timerText.Text = string.format("%02d:%02d", minutes, seconds)
+
+	pcall(function()
+		if workspace:FindFirstChild("TrollHealth") and workspace.TrollHealth:IsA("NumberValue") then
+			bossHPText.Text = "Boss HP: " .. workspace.TrollHealth.Value
+		else
+			bossHPText.Text = "Boss HP: ???"
+		end
+	end)
 end
 
 while true do
