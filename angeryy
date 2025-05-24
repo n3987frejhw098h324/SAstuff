@@ -1,0 +1,25 @@
+game:GetService("RunService").RenderStepped:Connect(function()
+    pcall(function()
+        local plr = game.Players.LocalPlayer
+        local char = plr.Character
+        local hum = char and char:FindFirstChildOfClass("Humanoid")
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+        local animate = char and char:FindFirstChild("Animate")
+
+        if hum and hrp then
+            -- Disable default animations
+            if animate then
+                animate.Disabled = true
+            end
+
+            -- Stop tool animations by stopping all tracks
+            for _, track in ipairs(hum:GetPlayingAnimationTracks()) do
+                track:Stop()
+            end
+
+            -- Lock state and position
+            hum:ChangeState(11)
+            hrp.CFrame = hrp.CFrame
+        end
+    end)
+end)
