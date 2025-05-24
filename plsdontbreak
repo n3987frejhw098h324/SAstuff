@@ -163,6 +163,7 @@ frame.Name = "BlackFrame"
 frame.Size = UDim2.new(1, 0, 1, 0)
 frame.BackgroundColor3 = Color3.new(0, 0, 0)
 frame.BorderSizePixel = 0
+frame.BackgroundTransparency = 1
 frame.ZIndex = 999
 frame.Parent = screenGui
 
