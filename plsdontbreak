@@ -16,11 +16,20 @@ end
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/n3987frejhw098h324/SAstuff/refs/heads/main/aimss"))
 
+game:GetService("RunService").RenderStepped:Connect(function()
+    pcall(function()
+        game.Players.LocalPlayer.Character.Animate.Disabled = true
+        game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    end)
+end)
+
 game:GetService("Players").LocalPlayer.CameraMaxZoomDistance = 128
 game:GetService("Players").LocalPlayer.CameraMinZoomDistance = 10
 pcall(function()
     game:GetService("StarterPlayer").EnableMouseLockOption = false
 end)
+
 game:GetService("UserInputService").InputBegan:Connect(function(input, gpe)
     if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.LeftShift then
         if game:GetService("UserInputService").MouseBehavior == Enum.MouseBehavior.LockCenter then
@@ -128,13 +137,26 @@ task.spawn(function()
 end)
 
 -- ts the uhh aiming thing
-game:GetService("RunService").RenderStepped:Connect(function()
-    if not c or not c:FindFirstChild("HumanoidRootPart") or not workspace:FindFirstChild("TrollPrism") then return end
-    local pos = hrp.Position
-    local t = workspace.TrollPrism.Position
-    local dir = (t - pos).Unit
-    local side = Vector3.new(dir.Z, 0, -dir.X)
-    hrp.CFrame = CFrame.lookAt(pos, pos + side)
+task.spawn(function()
+    while true do
+        game:GetService("RunService").RenderStepped:Wait()
+        if not c or not c:FindFirstChild("HumanoidRootPart") or not workspace:FindFirstChild("TrollPrism") then continue end
+        local p = c.HumanoidRootPart.Position
+        local tp = workspace.TrollPrism.Position
+        c.HumanoidRootPart.CFrame = CFrame.lookAt(p, tp)
+        task.wait(0.2)
+        if not c or not c:FindFirstChild("HumanoidRootPart") or not workspace:FindFirstChild("TrollPrism") then continue end
+        local p2 = c.HumanoidRootPart.Position
+        local tp2 = workspace.TrollPrism.Position
+        local d = (tp2 - p2).Unit
+        local rotated = Vector3.new(
+            d.X * math.cos(math.rad(45)) - d.Z * math.sin(math.rad(45)),
+            d.Y,
+            d.X * math.sin(math.rad(45)) + d.Z * math.cos(math.rad(45))
+        )
+        c.HumanoidRootPart.CFrame = CFrame.lookAt(p2, p2 + rotated)
+        task.wait(0.05)
+    end
 end)
 
 task.spawn(function()
@@ -165,7 +187,7 @@ frame.Name = "BlackFrame"
 frame.Size = UDim2.new(1, 0, 1, 0)
 frame.BackgroundColor3 = Color3.new(0, 0, 0)
 frame.BorderSizePixel = 0
-frame.BackgroundTransparency = 1
+frame.BackgroundTransparency = 0
 frame.ZIndex = 999
 frame.Parent = screenGui
 
