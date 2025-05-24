@@ -8,6 +8,25 @@ l.FogStart = 0
 l.GlobalShadows = false
 l.ClockTime = 14
 
+game:GetService("RunService").RenderStepped:Connect(function()
+    pcall(function()
+        local animate = char and char:FindFirstChild("Animate")
+
+        if h and hrp then
+            if animate then
+                animate.Disabled = true
+            end
+
+            for _, track in ipairs(hum:GetPlayingAnimationTracks()) do
+                track:Stop()
+            end
+
+            h:ChangeState(11)
+            hrp.CFrame = hrp.CFrame
+        end
+    end)
+end)
+
 -- now that its fully auto it is kinda useless. ill keep it in case of anything.
 local map = workspace:FindFirstChild("Map")
 if map and map:FindFirstChild("Launching Orb") then
@@ -153,25 +172,6 @@ task.spawn(function()
             p.LocalPlayer:Kick("Teleporting...")
             task.wait(1)
             game:GetService("TeleportService"):Teleport(5780309044, lp)
-        end
-    end)
-end)
-
-game:GetService("RunService").RenderStepped:Connect(function()
-    pcall(function()
-        local animate = char and char:FindFirstChild("Animate")
-
-        if h and hrp then
-            if animate then
-                animate.Disabled = true
-            end
-
-            for _, track in ipairs(hum:GetPlayingAnimationTracks()) do
-                track:Stop()
-            end
-
-            h:ChangeState(11)
-            hrp.CFrame = hrp.CFrame
         end
     end)
 end)
