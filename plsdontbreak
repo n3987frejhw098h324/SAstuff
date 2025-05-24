@@ -8,57 +8,18 @@ l.FogStart = 0
 l.GlobalShadows = false
 l.ClockTime = 14
 
-game:GetService("RunService").RenderStepped:Connect(function()
-    pcall(function()
-        local animate = char and char:FindFirstChild("Animate")
-
-        if h and hrp then
-            if animate then
-                animate.Disabled = true
-            end
-
-            for _, track in ipairs(hum:GetPlayingAnimationTracks()) do
-                track:Stop()
-            end
-
-            h:ChangeState(11)
-            hrp.CFrame = hrp.CFrame
-        end
-    end)
-end)
-
 -- now that its fully auto it is kinda useless. ill keep it in case of anything.
 local map = workspace:FindFirstChild("Map")
 if map and map:FindFirstChild("Launching Orb") then
     map["Launching Orb"]:Destroy()
 end
 
-game:GetService("RunService").RenderStepped:Connect(function()
-    pcall(function()
-        game.Players.LocalPlayer.Character.Animate.Disabled = true
-        game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-    end)
-end)
-
-game:GetService("Players").LocalPlayer.CameraMaxZoomDistance = 128
-game:GetService("Players").LocalPlayer.CameraMinZoomDistance = 10
-pcall(function()
-    game:GetService("StarterPlayer").EnableMouseLockOption = false
-end)
-
-game:GetService("UserInputService").InputBegan:Connect(function(input, gpe)
-    if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.LeftShift then
-        if game:GetService("UserInputService").MouseBehavior == Enum.MouseBehavior.LockCenter then
-            game:GetService("UserInputService").MouseBehavior = Enum.MouseBehavior.Default
-        end
-    end
-end)
 
 nocd = hookfunction(wait, function(s)
     return nocd(0)
 end)
 
+game:GetService("Players").LocalPlayer.CameraMinZoomDistance = 10
 game:GetService("Players").LocalPlayer:WaitForChild("PlayerScripts"):FindFirstChild("Client2"):Destroy()
 
 local p = game:GetService("Players")
@@ -138,6 +99,18 @@ hp:GetPropertyChangedSignal("Value"):Connect(function()
             wait(0) --idfk what was the original gng tryna do with "WaitTime" but ok
             lp.Backpack["KnightsSword"].Parent = c
         end
+    end
+end)
+
+--ts redeems it automatically
+task.spawn(function()
+    while true do
+        for _, v in ipairs(workspace:GetDescendants()) do
+            if v:IsA("ClickDetector") then
+                fireclickdetector(v)
+            end
+        end
+        task.wait(0.1)
     end
 end)
 
