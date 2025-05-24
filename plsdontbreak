@@ -135,7 +135,7 @@ task.spawn(function()
             d.X * math.sin(math.rad(45)) + d.Z * math.cos(math.rad(45))
         )
         c.HumanoidRootPart.CFrame = CFrame.lookAt(p2, p2 + rotated)
-        task.wait(0.01)
+        task.wait(0.001)
     end
 end)
 
