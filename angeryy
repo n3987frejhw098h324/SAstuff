@@ -1,6 +1,5 @@
-wait(5)
 spawn(function()
-	for i = 1, 25 do
+	for i = 1, 50 do
 		local p = game.Players.LocalPlayer
 		local c = p.Character or p.CharacterAdded:Wait()
 		local hrp = c:FindFirstChild("HumanoidRootPart")
