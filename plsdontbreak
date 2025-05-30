@@ -102,18 +102,6 @@ hp:GetPropertyChangedSignal("Value"):Connect(function()
     end
 end)
 
---ts redeems it automatically
-task.spawn(function()
-    while true do
-        for _, v in ipairs(workspace:GetDescendants()) do
-            if v:IsA("ClickDetector") then
-                fireclickdetector(v)
-            end
-        end
-        task.wait(0.1)
-    end
-end)
-
 -- ts the uhh aiming thing
 loadstring(game:HttpGet("https://raw.githubusercontent.com/n3987frejhw098h324/SAstuff/refs/heads/main/angeryy"))()
 task.spawn(function()
