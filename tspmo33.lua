@@ -109,18 +109,21 @@ end)
 -- ts the uhh aiming thing
 loadstring(game:HttpGet("https://raw.githubusercontent.com/n3987frejhw098h324/SAstuff/refs/heads/main/angeryy"))()
 task.spawn(function()
-    wait(5)
+wait(8)
     while true do
-        game:GetService("RunService").RenderStepped:Wait()
+        task.wait(0.05)
+        if not c or not c:FindFirstChild("HumanoidRootPart") or not workspace:FindFirstChild("TrollPrism") then 
+            continue 
+        end
 
-        if not c or not c:FindFirstChild("HumanoidRootPart") or not workspace:FindFirstChild("TrollPrism") then continue end
         local p = c.HumanoidRootPart.Position
         local tp = workspace.TrollPrism.Position
-
         c.HumanoidRootPart.CFrame = CFrame.lookAt(p, tp)
-        task.wait(0.1)
 
-        if not c or not c:FindFirstChild("HumanoidRootPart") or not workspace:FindFirstChild("TrollPrism") then continue end
+        if not c or not c:FindFirstChild("HumanoidRootPart") or not workspace:FindFirstChild("TrollPrism") then 
+            continue 
+        end
+
         local p2 = c.HumanoidRootPart.Position
         local tp2 = workspace.TrollPrism.Position
 
@@ -132,6 +135,6 @@ task.spawn(function()
         )
 
         c.HumanoidRootPart.CFrame = CFrame.lookAt(p2, p2 + rotated)
-        task.wait(0.1)
     end
 end)
+
