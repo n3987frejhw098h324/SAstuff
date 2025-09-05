@@ -11,25 +11,26 @@ spawn(function()
 end)
 
 
-game:GetService("RunService").RenderStepped:Connect(function()
-    pcall(function()
-        local plr = game.Players.LocalPlayer
-        local char = plr.Character
-        local hum = char and char:FindFirstChildOfClass("Humanoid")
-        local hrp = char and char:FindFirstChild("HumanoidRootPart")
-        local animate = char and char:FindFirstChild("Animate")
+task.spawn(function()
+    while task.wait(0.2) do -- every 0.2 sec instead of every frame
+        pcall(function()
+            local plr = game.Players.LocalPlayer
+            local char = plr.Character
+            local hum = char and char:FindFirstChildOfClass("Humanoid")
+            local hrp = char and char:FindFirstChild("HumanoidRootPart")
+            local animate = char and char:FindFirstChild("Animate")
 
-        if hum and hrp then
-            if animate then
-                animate.Disabled = true
+            if hum and hrp then
+                if animate then
+                    animate.Disabled = true
+                end
+
+                for _, track in ipairs(hum:GetPlayingAnimationTracks()) do
+                    track:Stop()
+                end
+
+                hum:ChangeState(11)
             end
-
-            for _, track in ipairs(hum:GetPlayingAnimationTracks()) do
-                track:Stop()
-            end
-
-            hum:ChangeState(11)
-            hrp.CFrame = hrp.CFrame
-        end
-    end)
+        end)
+    end
 end)
