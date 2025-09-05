@@ -18,7 +18,7 @@ end
 if hookfunction then
     local OWgg
     OWgg = hookfunction(wait, function(s)
-        return OWgg(0)
+        return OWgg(math.max(s or 0, 0.01))
     end)
 else
     warn("your bitchass executor is ass")
