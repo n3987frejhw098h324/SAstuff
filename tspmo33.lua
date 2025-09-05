@@ -15,9 +15,14 @@ if map and map:FindFirstChild("Launching Orb") then
 end
 
 
-nocd = hookfunction(wait, function(s)
-    return nocd(0)
-end)
+if hookfunction then
+    local OWgg
+    OWgg = hookfunction(wait, function(s)
+        return OWgg(0)
+    end)
+else
+    warn("your bitchass executor is ass")
+end
 
 game:GetService("Players").LocalPlayer:WaitForChild("PlayerScripts"):FindFirstChild("Client2"):Destroy()
 
