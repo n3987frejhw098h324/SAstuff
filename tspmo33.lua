@@ -8,16 +8,23 @@ l.FogStart = 0
 l.GlobalShadows = false
 l.ClockTime = 14
 
-task.spawn(function()
-    while true do
-        for _, v in ipairs(workspace:GetDescendants()) do
-            if v:IsA("ClickDetector") then
+local function clickIt(v)
+    if v:IsA("ClickDetector") then
+        task.defer(function()
+            while v.Parent and v:IsDescendantOf(workspace) do
                 fireclickdetector(v)
+                task.wait(0.1)
             end
-        end
-        task.wait(0.1)
+        end)
     end
-end)
+end
+
+for _, v in ipairs(workspace:GetDescendants()) do
+    clickIt(v)
+end
+
+workspace.DescendantAdded:Connect(clickIt)
+
 
 --[[task.spawn(function()
     while true do
