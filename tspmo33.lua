@@ -19,7 +19,7 @@ task.spawn(function()
     end
 end)
 
-task.spawn(function()
+--[[task.spawn(function()
     while true do
         for _, itemName in ipairs({"Rainbow Orb", "DIO's Skull 2"}) do
             if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(itemName)
@@ -46,7 +46,7 @@ task.spawn(function()
         end
         task.wait(0.1)
     end
-end)
+end)]]
 -- now that its fully auto it is kinda useless. ill keep it in case of anything.
 local map = workspace:FindFirstChild("Map")
 if map and map:FindFirstChild("Launching Orb") then
