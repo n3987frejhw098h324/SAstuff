@@ -157,7 +157,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/n3987frejhw098h324/SA
 task.spawn(function()
 wait(8)
     while true do
-        task.wait(0.05)
+        task.wait(0.01)
         if not c or not c:FindFirstChild("HumanoidRootPart") or not workspace:FindFirstChild("TrollPrism") then 
             continue 
         end
