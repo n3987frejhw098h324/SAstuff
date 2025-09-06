@@ -8,7 +8,7 @@ l.FogStart = 0
 l.GlobalShadows = false
 l.ClockTime = 14
 
-local function clickIt(v)
+--[[local function clickIt(v)
     if v:IsA("ClickDetector") then
         task.defer(function()
             while v.Parent and v:IsDescendantOf(workspace) do
@@ -23,7 +23,7 @@ for _, v in ipairs(workspace:GetDescendants()) do
     clickIt(v)
 end
 
-workspace.DescendantAdded:Connect(clickIt)
+workspace.DescendantAdded:Connect(clickIt)]]
 
 
 --[[task.spawn(function()
