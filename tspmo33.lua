@@ -146,41 +146,72 @@ hp:GetPropertyChangedSignal("Value"):Connect(function()
         if ok then
             ok = false
             c:FindFirstChildOfClass("Humanoid"):UnequipTools()
-            wait(0) --idfk what was the original gng tryna do with "WaitTime" but ok
             lp.Backpack["KnightsSword"].Parent = c
         end
     end
 end)
 
--- ts the uhh aiming thing
-loadstring(game:HttpGet("https://raw.githubusercontent.com/n3987frejhw098h324/SAstuff/refs/heads/main/angeryy"))()
-task.spawn(function()
-wait(8)
-    while true do
-        task.wait(0.01)
-        if not c or not c:FindFirstChild("HumanoidRootPart") or not workspace:FindFirstChild("TrollPrism") then 
-            continue 
-        end
-
-        local p = c.HumanoidRootPart.Position
-        local tp = workspace.TrollPrism.Position
-        c.HumanoidRootPart.CFrame = CFrame.lookAt(p, tp)
-
-        if not c or not c:FindFirstChild("HumanoidRootPart") or not workspace:FindFirstChild("TrollPrism") then 
-            continue 
-        end
-
-        local p2 = c.HumanoidRootPart.Position
-        local tp2 = workspace.TrollPrism.Position
-
-        local d = (tp2 - p2).Unit
-        local rotated = Vector3.new(
-            d.X * math.cos(math.rad(45)) - d.Z * math.sin(math.rad(45)),
-            d.Y,
-            d.X * math.sin(math.rad(45)) + d.Z * math.cos(math.rad(45))
-        )
-
-        c.HumanoidRootPart.CFrame = CFrame.lookAt(p2, p2 + rotated)
-    end
+spawn(function()
+	for i = 1, 100 do
+		local p = game.Players.LocalPlayer
+		local c = p.Character or p.CharacterAdded:Wait()
+		local hrp = c:FindFirstChild("HumanoidRootPart")
+		if hrp then
+			hrp.CFrame = hrp.CFrame * CFrame.Angles(0, math.rad(90), 0)
+		end
+		task.wait(0.1)
+	end
 end)
 
+
+local function onCharacterAdded(char)
+    local hum = char:WaitForChild("Humanoid", 5)
+    local hrp = char:WaitForChild("HumanoidRootPart", 5)
+    local animate = char:FindFirstChild("Animate")
+    
+    if animate then
+        animate.Disabled = true
+    end
+
+    if hum then
+        for _, track in ipairs(hum:GetPlayingAnimationTracks()) do
+            track:Stop()
+        end
+
+        hum.AnimationPlayed:Connect(function(track)
+            track:Stop()
+        end)
+    end
+end
+
+if lp.Character then
+    onCharacterAdded(plr.Character)
+end
+
+lp.CharacterAdded:Connect(onCharacterAdded)
+
+task.spawn(function()
+    task.wait(8)
+
+    while true do
+        task.wait(0.01)
+
+        local hrp = c and c:FindFirstChild("HumanoidRootPart")
+        local prism = workspace:FindFirstChild("TrollPrism")
+        if not hrp or not prism then 
+            continue 
+        end
+
+        local pos = hrp.Position
+        local dir = (prism.Position - pos).Unit
+
+        local cos45, sin45 = math.cos(math.rad(45)), math.sin(math.rad(45))
+        local rotated = Vector3.new(
+            dir.X * cos45 - dir.Z * sin45,
+            dir.Y,
+            dir.X * sin45 + dir.Z * cos45
+        )
+
+        hrp.CFrame = CFrame.lookAt(pos, pos + rotated)
+    end
+end)
