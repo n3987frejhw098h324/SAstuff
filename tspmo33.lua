@@ -8,6 +8,45 @@ l.FogStart = 0
 l.GlobalShadows = false
 l.ClockTime = 14
 
+task.spawn(function()
+    while true do
+        for _, v in ipairs(workspace:GetDescendants()) do
+            if v:IsA("ClickDetector") then
+                fireclickdetector(v)
+            end
+        end
+        task.wait(0.1)
+    end
+end)
+
+task.spawn(function()
+    while true do
+        for _, itemName in ipairs({"Rainbow Orb", "DIO's Skull 2"}) do
+            if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(itemName)
+            or (game:GetService("Players").LocalPlayer.Character and game:GetService("Players").LocalPlayer.Character:FindFirstChild(itemName)) then
+
+                task.spawn(function()
+                    while game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(itemName)
+                    or (game:GetService("Players").LocalPlayer.Character and game:GetService("Players").LocalPlayer.Character:FindFirstChild(itemName)) do
+
+                        if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(itemName) then
+                            game:GetService("Players").LocalPlayer.Backpack[itemName].Parent = game:GetService("Players").LocalPlayer.Character
+                        end
+
+                        task.wait(0.1)
+
+                        for i = 1, 8 do
+                            game:GetService("ReplicatedStorage"):WaitForChild("Bank"):FireServer("Slot" .. i, false, false)
+                        end
+
+                        task.wait(0.1)
+                    end
+                end)
+            end
+        end
+        task.wait(0.1)
+    end
+end)
 -- now that its fully auto it is kinda useless. ill keep it in case of anything.
 local map = workspace:FindFirstChild("Map")
 if map and map:FindFirstChild("Launching Orb") then
